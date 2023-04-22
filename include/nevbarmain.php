@@ -1,6 +1,5 @@
 <?php
-session_start();
-print_r($_SESSION);
+
     if(sizeof($_SESSION) > 0){
         $name = $_SESSION['name'];
         $lastname = $_SESSION['lastname'];

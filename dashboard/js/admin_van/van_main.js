@@ -94,6 +94,5 @@ function modal_add_van() {
     `;
     $('body').append(html);
     $('#modal_add_van').modal('show');
-
-  }
+}
 
