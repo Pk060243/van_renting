@@ -9,7 +9,11 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Template</title>
     <?php include '../assets/include/theme_include_css.php'; ?>
-
+    <style>
+        .table th {
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body class="  ">
@@ -63,38 +67,34 @@ session_start();
         </div>
         <div class="conatiner-fluid content-inner mt-n5 py-0">
             <!-- MAIN BODY START -->
+            <div class="mt-5">
+                <div class="card p-3">
+                    <div class="col-md-12 d-flex flex-row-reverse mb-2">
+                        <div class="">
+                            <button class="btn btn-success" onclick="modal_add_van();"type="button">Add</button>
+                        </div>
+                    </div>
+                    <div class="table-responsive border-bottom my-3">
+                        <table id="table_main" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>ป้ายทะเบียน</th>
+                                    <th>ยี่ห้อรถ</th>
+                                    <th>ประเภท</th>
+                                    <th>ที่นั่ง</th>
+                                    <th>Menu</th>
+                                </tr>
+                            </thead>
+                            <tbody>
 
+                            </tbody>
 
+                        </table>
+                    </div>
+                </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            </div>
 
 
 
@@ -114,3 +114,4 @@ session_start();
 </body>
 
 </html>
+<script src="js/admin_van/van_main.js"></script>
