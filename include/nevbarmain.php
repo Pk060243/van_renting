@@ -78,7 +78,7 @@
                                     echo '<a class="dropdown-item" href="sign-up.php">Register</a>';
                                     echo '<a class="dropdown-item" href="sign-in.php">Login</a>';
                                 }else{
-                                    echo '<a class="dropdown-item" href="dashboard/auth/sign-in.php">Logout</a>';
+                                    echo '<a class="dropdown-item" href="sign-in.php">Logout</a>';
 
                                 }
                             ?>
