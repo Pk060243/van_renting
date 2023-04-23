@@ -19,11 +19,12 @@ $sql = "
         `type`
     )
     VALUES(
-        '$plate',
+        
         '$brand',
         '$model',
         '$color',
         '$seat',
+        '$plate',
         '$type'
     );
 ";
