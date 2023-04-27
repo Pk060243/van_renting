@@ -77,73 +77,9 @@ session_start();
         <div class="conatiner-fluid content-inner mt-n5 py-0">
             <!-- MAIN BODY START -->
             <div class="mt-5">
-
-                <div class="row  row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
-                    <div class="col">
-                        <div class="card">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: รูป" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">รูป</text></svg>
-                            <div class="card-body">
-                                <h5 class="card-title">รถตู้ 1</h5>
-                                <p class="card-text">ข้อมูลรถตู้</p>
-                                <a href="#" class="btn btn-primary float-end">เช่าคันนี้</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: รูป" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">รูป</text></svg>
-                            <div class="card-body">
-                                <h5 class="card-title">รถตู้ 2</h5>
-                                <p class="card-text">ข้อมูลรถตู้</p>
-                                <a href="#" class="btn btn-primary float-end">เช่าคันนี้</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: รูป" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">รูป</text></svg>
-                            <div class="card-body">
-                                <h5 class="card-title">รถตู้ 3</h5>
-                                <p class="card-text">ข้อมูลรถตู้</p>
-                                <a href="#" class="btn btn-primary float-end">เช่าคันนี้</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: รูป" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">รูป</text></svg>
-                            <div class="card-body">
-                                <h5 class="card-title">รถตู้ 4</h5>
-                                <p class="card-text">ข้อมูลรถตู้</p>
-                                <a href="#" class="btn btn-primary float-end">เช่าคันนี้</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: รูป" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">รูป</text></svg>
-                            <div class="card-body">
-                                <h5 class="card-title">รถตู้ 5</h5>
-                                <p class="card-text">ข้อมูลรถตู้</p>
-                                <a href="#" class="btn btn-primary float-end">เช่าคันนี้</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <svg class="bd-placeholder-img card-img-top" width="100%" height="180" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: รูป" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#868e96"></rect><text x="50%" y="50%" fill="#dee2e6" dy=".3em">รูป</text></svg>
-                            <div class="card-body">
-                                <h5 class="card-title">รถตู้ 6</h5>
-                                <p class="card-text">ข้อมูลรถตู้</p>
-                                <a href="#" class="btn btn-primary float-end">เช่าคันนี้</a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    
-                    
+                <div class="row  row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 van-detail">
+                    <!-- Van -->
                 </div>
-                
             </div>    
             
 
@@ -204,6 +140,8 @@ session_start();
 
     <!-- App Script -->
     <script src="assets/js/hope-ui.js" defer></script>
+    <script src="js/home/home.js" defer></script>
+
 </body>
 
 </html>

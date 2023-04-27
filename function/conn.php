@@ -5,4 +5,4 @@ $password = "";
 $dbname = "van_renting";
 
 // Create connection
-$conn = mysqli_connect($servername, $username, $password, $dbname);
+$con = mysqli_connect($servername, $username, $password, $dbname);

@@ -4,7 +4,7 @@ include '../function/conn.php';
 $user = $_POST['User'];
 $pass = $_POST['Pass'];
 $sql = "SELECT * from userid where `username` = '$user' AND `password` = '$pass'";
-$result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+$result = mysqli_query($con, $sql) or die(mysqli_error($con));
 
 if (mysqli_num_rows($result) > 0) {
   // output data of each row
