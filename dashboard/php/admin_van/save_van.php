@@ -7,8 +7,7 @@ $model = $_POST['model'];
 $color = $_POST['color'];
 $seat = $_POST['seat'];
 $type = $_POST['type'];
-
-
+$file = $_POST['file'];
 $sql = "
     INSERT INTO `van`(
         `brand`,
@@ -16,7 +15,8 @@ $sql = "
         `color`,
         `seat`,
         `plate`,
-        `type`
+        `type`,
+        `pic`
     )
     VALUES(
         
@@ -25,7 +25,8 @@ $sql = "
         '$color',
         '$seat',
         '$plate',
-        '$type'
+        '$type',
+        '$file'
     );
 ";
 if ($con->query($sql) === TRUE) {

@@ -106,4 +106,5 @@ session_start();
 </body>
 
 </html>
+<script src="../assets/lib/resize_image/jquery.resizeImg.js"></script>
 <script src="js/admin_van/van_main.js"></script>
