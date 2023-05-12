@@ -2,16 +2,24 @@
 include '../../core/conn.php';
 
 $ID = $_POST['ID'];
-$price = $_POST['price'];
+$plate = $_POST['plate'];
+$brand = $_POST['brand'];
+$model = $_POST['model'];
+$color = $_POST['color'];
+$seat = $_POST['seat'];
 $type = $_POST['type'];
 
 
 $sql = "
   UPDATE
-    `price`
+    `van`
   SET
-    `price` = '$price',
-    `type_van` = '$type'
+    `brand` = '$brand',
+    `model` = '$model',
+    `color` = '$color',
+    `seat` = '$seat',
+    `plate` = '$plate',
+    `type` = '$type'
   WHERE
     `ID` = '$ID'
 

@@ -30,3 +30,5 @@
 
     <!-- App Script -->
     <script src="../assets/js/hope-ui.js" defer></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

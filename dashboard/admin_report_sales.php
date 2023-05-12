@@ -7,8 +7,9 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Main Admin</title>
+    <title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Template</title>
     <?php include '../assets/include/theme_include_css.php'; ?>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
 </head>
 
@@ -34,7 +35,7 @@ session_start();
                         <div class="col-md-12">
                             <div class="flex-wrap d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h1>Hello Devs!</h1>
+                                    <h1>รายงาน ยอดการจอง</h1>
 
                                 </div>
                                 <div>
@@ -61,93 +62,57 @@ session_start();
             </div>
             <!--Nav End-->
         </div>
-        <div class="conatiner-fluid content-inner mt-5 py-0">
+        <div class="conatiner-fluid content-inner mt-n5 py-0">
             <!-- MAIN BODY START -->
-            <div class="container mt-5">
-                <div class="row">
-                    <div class="card">
-                        <h3>รอการตรวจสอบ</h3>
-                        <div class="table-responsive border-bottom my-3">
-                            <!-- <button class="btn btn-success" onclick="get_table_pending_order()">refresh</button> -->
-                            <table id="table_pending" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>หมายเลข</th>
-                                        <th>ลูกค้า</th>
-                                        <th>เบอร์ลูกค้า</th>
-                                        <th>ราคา</th>
-                                        <th>เวลาจอง</th>
-                                        <th>สถานะ</th>
-                                        <th>Menu</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
 
-                                </tbody>
-                            </table>
+
+            <div class="mt-5">
+                <div class="card p-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                        <button onclick="get_sales_report_table();">asdasdsad</button>
+
+                            <fieldset class="mb-3">
+                                <legend>สถานะ</legend>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="chk_success" name="chk_st[]">
+                                    <label class="form-check-label" for="chk_success">จองสำเร็จ</label>
+                                </div>
+                                <div class="mb-3 form-check">
+                                    <input type="checkbox" class="form-check-input" id="chk_reject" name="chk_st[]">
+                                    <label class="form-check-label" for="chk_reject">ถูกยกเลิก</label>
+                                </div>
+
+                            </fieldset>
+                        </div>
+                        <div class="col-md-6">
+                            <fieldset class="mb-3">
+                                <legend>เลือกช่วงเวลา</legend>
+                                <label for="basic-url" class="form-label">วันที่จอง</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control date_flatpicker" placeholder="Date Picker">
+                                </div>
+                            </fieldset>
                         </div>
                     </div>
-                </div>
-
-                <div class="row">
-                    <div class="card">
-                        <h3>ตรวจสอบแล้ว</h3>
-                        <div class="table-responsive border-bottom my-3">
-                            <!-- <button class="btn btn-success" onclick="get_table_approved_order()">refresh</button> -->
-                            <table id="table_approved" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>หมายเลข</th>
-                                        <th>ลูกค้า</th>
-                                        <th>เบอร์ลูกค้า</th>
-                                        <th>ราคา</th>
-                                        <th>เวลาจอง</th>
-                                        <th>สถานะ</th>
-                                        <th>Menu</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-
-                                </tbody>
-                            </table>
-                        </div>
+                    <div class="table-responsive border-bottom my-3">
+                        <table id="table_main" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>หมายเลขการจอง</th>
+                                    <th>รถที่จอง</th>
+                                    <th>ชื่อลูกค้า</th>
+                                    <th>สถานะ</th>
+                                    <th>Menu</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -162,10 +127,16 @@ session_start();
     <!-- Wrapper End-->
     <!-- offcanvas start -->
     <?php include 'include/offcanvas.php'; ?>
+
     <?php include '../assets/include/theme_include_js.php'; ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="js/admin_report/report_sale.js"></script>
 
 </body>
 
 </html>
-<script src="../assets/lib/resize_image/jquery.resizeImg.js"></script>
-<script src="js/admin_main/admin_main.js"></script>
+
+<script>
+
+</script>

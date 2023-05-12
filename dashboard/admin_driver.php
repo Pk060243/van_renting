@@ -63,7 +63,7 @@ session_start();
                 <div class="card p-3">
                     <div class="col-md-12 d-flex flex-row-reverse mb-2">
                         <div class="">
-                            <button class="btn btn-success" onclick="modal_add_price();"type="button">Add</button>
+                            <button class="btn btn-success" onclick="modal_add_driver();"type="button">Add</button>
                         </div>
                     </div>
                     <div class="table-responsive border-bottom my-3">
@@ -71,8 +71,10 @@ session_start();
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>ราคาต่อวัน</th>
-                                    <th>ประเภทรถตู้</th>
+                                    <th>ชือคนขับ</th>
+                                    <th>เพศ</th>
+                                    <th>เบอร์โทร</th>
+                                    <th>สถานะ</th>
                                     <th>Menu</th>
                                 </tr>
                             </thead>
@@ -104,4 +106,5 @@ session_start();
 </body>
 
 </html>
-<script src="js/admin_price/price_main.js"></script>
+<script src="../assets/lib/resize_image/jquery.resizeImg.js"></script>
+<script src="js/admin_driver/driver_main.js"></script>

@@ -34,7 +34,6 @@ function html_admin_main_price(data) {
       html += `
           <tr>
               <td align="center">${i + 1}</td>
-              <td align="center">${v["price_name"]}</td>
               <td align="center">${v["price"]}</td>
               <td align="center">${v["type_van"]}</td>
               <td align="center">${html_btn}</td>
@@ -95,11 +94,8 @@ function modal_add_price() {
                 </div>
                 <div class="modal-body">
                     <div class="container">
-                      <label for="basic-url" class="form-label">ชื่อ</label>
-                      <div class="input-group mb-3">
-                          <input type="text" class="form-control inp_name" id="" aria-describedby="basic-addon3">
-                      </div>
-                      <label for="basic-url" class="form-label">ราคา</label>
+                     
+                      <label for="basic-url" class="form-label">ราคาต่อวัน</label>
                       <div class="input-group mb-3">
                           <input type="text" class="form-control inp_price" id="" aria-describedby="basic-addon3">
                       </div>
@@ -121,13 +117,9 @@ function modal_add_price() {
     $('#modal_add_price').modal('show');
 }
 async function save_price(){
-  let name = $('.inp_name').val();
   let price = $('.inp_price').val();
-
   let type = $('.inp_type').val();
-
   let data = {
-    'name' : name,
     'price' : price,
     'type' : type,
   };
@@ -176,7 +168,6 @@ function ajax_get_edit_price(data={}){
 function modal_edit_price(data = {}) {
   $('#modal_edit_price').remove();
   let ID = (!!data['ID'])? data['ID'] : '' ;
-  let name = (!!data['price_name'])? data['price_name'] : '' ;
   let price = (!!data['price'])? data['price'] : '' ;
   let type = (!!data['type_van'])? data['type_van'] : '' ;
 let html = "";
@@ -191,11 +182,6 @@ html = `
               </div>
               <div class="modal-body">
                   <div class="container">
-                    <label for="basic-url" class="form-label">ชื่อ</label>
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control inp_edit_name" id="" aria-describedby="basic-addon3" value="${name}">
-                    </div>
-
                     <label for="basic-url" class="form-label">ราคา</label>
                     <div class="input-group mb-3">
                         <input type="text" class="form-control inp_edit_price" id="" aria-describedby="basic-addon3" value="${price}">
@@ -220,13 +206,11 @@ html = `
 async function save_edit_price(e=null) {
   let ID = $(e).closest('#modal_edit_price').attr('data-id');
 
-  let name = $('.inp_edit_name').val();
   let price = $('.inp_edit_price').val();
   let type = $('.inp_edit_type').val();
 
   let data = {
     "ID" : ID,
-    'name' : name,
     'price' : price,
     'type' : type,
   };

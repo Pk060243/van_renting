@@ -29,7 +29,9 @@ session_start();
 
     <!-- RTL Css -->
     <link rel="stylesheet" href="assets/css/rtl.min.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+    <!-- font awsome Css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
 
 </head>
@@ -56,7 +58,7 @@ session_start();
                         <div class="col-md-12">
                             <div class="flex-wrap d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h1>Hello Customer</h1>
+                                    <h1>Order</h1>
 
                                 </div>
 
@@ -77,21 +79,57 @@ session_start();
         </div>
         <div class="conatiner-fluid content-inner mt-n5 py-0">
             <!-- MAIN BODY START -->
-            <div class="mt-5">
-                <div class="row  row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 van-detail">
-                    <!-- Van -->
+
+            <!-- <div class="mt-5">
+                <div class="card p-3">
+                    <div class="table-responsive border-bottom my-3">
+                        <table id="table_main" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>หมายเลขจอง</th>
+                                    <th>ยี่ห้อรถ</th>
+                                    <th>ประเภท</th>
+                                    <th>ที่นั่ง</th>
+                                    <th>ราคา</th>
+                                    <th>วันที่รับรถ</th>
+                                    <th>สถานะ</th>
+                                    <th>เมนู</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+
+                        </table>
+                    </div>
                 </div>
-            </div>    
-            
 
+            </div> -->
+            <div class="container mt-5">
+                <div class="row row-cols-1 row-cols-md-2 order-list">
+                    <!-- <div class="col">
+                        <div class="card">
+                            <img style="height:250px;" src="${pic}" />
+                            <div class="card-body">
+                                <h5 class="card-title">รถตู้ 1</h5>
+                                <div class="row">
+                                    <div class="col col-md-4 text-end"> ยี่ห้อ : </div>
+                                    <div class="col col-md-8"> ${v['brand']}</div>
 
+                                    <div class="col col-md-4 text-end"> รุ่น : </div>
+                                    <div class="col col-md-8"> ${v['model']}</div>
 
-
-
-
-
-
-
+                                    <div class="col col-md-4 text-end"> ที่นั่ง : </div>
+                                    <div class="col col-md-8"> ${v['seat']}</div>
+                                </div>
+                                <button data-id="${v['ID']}" class="btn btn-primary float-end" onclick="order_detail(this);">เช่าคันนี้</button>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
 
             <!-- MAIN BODY END -->
         </div>
@@ -130,16 +168,16 @@ session_start();
     <script src="assets/js/plugins/form-wizard.js"></script>
 
     <!-- AOS Animation Plugin-->
-    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
     <!-- App Script -->
-    <script src="assets/js/hope-ui.js" defer></script>
 
-    
-    <script src="js/home/home.js" defer></script>
+    <script src="assets/js/hope-ui.js" defer></script>
+    <script src="assets/lib/resize_image/jquery.resizeImg.js"></script>
+    <script src="js/order/order.js" defer></script>
 
 </body>
 
 </html>
 <script>
+
 </script>

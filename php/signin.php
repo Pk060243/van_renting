@@ -15,9 +15,11 @@ if (mysqli_num_rows($result) > 0) {
         $role = 'customer';
     }
     session_start();
+    $_SESSION['ID'] = $row['ID'];
+
     $_SESSION['role'] = $role;
-    $_SESSION['name'] = $role;
-    $_SESSION['lastname'] = $role;
+    $_SESSION['name'] = $row['name'];
+    $_SESSION['lastname'] = $row['lastname'];
 
    echo json_encode(array('st' => '1','role' => $role));
   }
