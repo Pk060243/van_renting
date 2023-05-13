@@ -43,7 +43,7 @@ const signup = {
         return new Promise(function (resolve, reject) {
             $.ajax({
                 type: "post",
-                url: "function/save_signup.php",
+                url: "php/signup/save_signup.php",
                 data: data,
                 dataType: "json",
                 success: function (response) {

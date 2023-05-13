@@ -94,11 +94,23 @@ async function modal_approve_order(data = {}){
     html_select_driver += html_select_driver_option;
     html_select_driver += '</select>';
 
-
-
-
     let ID = data['order_id'];
     let pic = data['payment_pic'];
+    let order_no = data['order_nmber'];
+    let van_plate = data['van_plate'];
+    let date_start = data['date_start'];
+    let date_end = data['date_end'];
+    let customer_full_name = data['customer_full_name'];
+    let phone = data['phone'];
+    let price = data['price'];
+    let payment_type = data['payment_type'];
+    if(payment_type == '1'){
+        text_payment = 'จ่ายเต็มจำนวน';
+    }else{
+        text_payment = 'จ่ายมัดจำ';
+    }
+
+
     let html = '';
     $('#modal_approve_order').remove();
     html = `
@@ -115,9 +127,16 @@ async function modal_approve_order(data = {}){
                     
                         <div>
                             <label for="basic-url" class="form-label">รายละเอียดการจอง</label>
-                                <div><label for="basic-url" class="form-label"></label></div>
-                                
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขจอง : ${order_no}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ทะเบียนรถ : ${van_plate}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >จองวันที่ : ${date_start} ถึง ${date_end}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ชื่อลูกค้า : ${customer_full_name}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เบอร์โทร : ${phone}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ราคา : ${price}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >การจ่ายเงิน : ${text_payment}</label></div>
+
                         </div>
+                        
                         <div class="col-md-6">
                             <label for="basic-url" class="form-label">เลือกคนขับ</label>
                             <div>${html_select_driver}</div>
@@ -207,6 +226,7 @@ function ajax_approve_order(data ={}){
     });
 }
 
+//ปฎิเสธออเดอร์
 function denied_order(e = null) {
     Swal.fire({
         title: 'ปฎิเสธการจอง',
@@ -315,6 +335,19 @@ function modal_view_approve_order(data = {}){
      
     let ID = data['order_id'];
     let pic = data['payment_pic'];
+    let order_no = data['order_nmber'];
+    let van_plate = data['van_plate'];
+    let date_start = data['date_start'];
+    let date_end = data['date_end'];
+    let customer_full_name = data['customer_full_name'];
+    let phone = data['phone'];
+    let price = data['price'];
+    let payment_type = data['payment_type'];
+    if(payment_type == '1'){
+        text_payment = 'จ่ายเต็มจำนวน';
+    }else{
+        text_payment = 'จ่ายมัดจำ';
+    }
     let html = '';
     $('#modal_view_approve_order').remove();
     html = `
@@ -331,8 +364,14 @@ function modal_view_approve_order(data = {}){
                     
                         <div>
                             <label for="basic-url" class="form-label">รายละเอียดการจอง</label>
-                                <div><label for="basic-url" class="form-label"></label></div>
-                                
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขจอง : ${order_no}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ทะเบียนรถ : ${van_plate}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >จองวันที่ : ${date_start} ถึง ${date_end}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ชื่อลูกค้า : ${customer_full_name}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เบอร์โทร : ${phone}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ราคา : ${price}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >การจ่ายเงิน : ${text_payment}</label></div>
+
                         </div>
                         <label for="basic-url" class="form-label">หลักฐานการชำระเงิน</label>
                         <div style="width:100%">

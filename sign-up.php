@@ -178,11 +178,7 @@
                                                          <input type="text" class="form-control inp-phone" name="phone" placeholder="Alternate Contact No." />
                                                       </div>
                                                    </div>
-                                                   <div class="col-md-6">
-                                                      <div class="form-group" id="datepicker">
-                                                         <label class="form-label">Birth day: *</label>
-                                                         <input type="date" class="form-control inp-birth" id="" value="">                                                      </div>
-                                                   </div>
+                                                   
                                                 </div>
                                              </div>
                                              <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next">Next</button>

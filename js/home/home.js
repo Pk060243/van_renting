@@ -2,6 +2,10 @@ $(document).ready(function () {
   get_van_talbe();
 });
 
+
+
+
+
 async function get_van_talbe() {
   let res = await ajax_get_van_table();
   html_admin_main_van(res);
@@ -177,6 +181,7 @@ function modal_order_detail(data = {}) {
     dateFormat: "d/m/Y",
     mode: "range",
   });
+
 }
 
 async function save_order_van(e = null) {
@@ -196,16 +201,38 @@ async function save_order_van(e = null) {
     date_to: date_to,
     pay_type: pay_type,
   };
-  console.log(data);
-  let res = await ajax_save_order(data);
+  Swal.fire({
+    title: 'ยืนยัน?',
+    text: "คุณยืนยันที่จะจองรถคันนี้หรือไม่",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'จองเลย!',
+    cancelButtonText: 'ยกเลิก'
 
-  if (res["st"] == "1") {
-    alert(
-      "คุณได้ทำการจองรถเรียบร้อยแล้ว กรุณาชำระเงินและอัพโหลดหลักฐานภายใน 30 นาที"
-    );
-    $("#modal_order_detail").modal("hide");
-    window.location.href = "order.php";
-  }
+  }).then(async (result) => {
+    if (result.isConfirmed) {
+      let res = await ajax_save_order(data);
+
+    if (res["st"] == "1") {
+      alert(
+        "คุณได้ทำการจองรถเรียบร้อยแล้ว กรุณาชำระเงินและอัพโหลดหลักฐานภายใน 30 นาที"
+      );
+      $("#modal_order_detail").modal("hide");
+      Swal.fire(
+        'Deleted!',
+        'Your file has been deleted.',
+        'success'
+      )
+      window.location.href = "order.php";
+    }else if(res["st"] == "0"){
+      alert(res['text']);
+    }
+      
+    }
+  })
+  
 }
 
 function ajax_save_order(data = {}) {

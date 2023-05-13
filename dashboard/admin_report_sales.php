@@ -7,7 +7,7 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Hope UI | Responsive Bootstrap 5 Admin Dashboard Template</title>
+    <title>Admin | Sale Report</title>
     <?php include '../assets/include/theme_include_css.php'; ?>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
 
@@ -70,7 +70,6 @@ session_start();
                 <div class="card p-3">
                     <div class="row">
                         <div class="col-md-6">
-                        <button onclick="get_sales_report_table();">asdasdsad</button>
 
                             <fieldset class="mb-3">
                                 <legend>สถานะ</legend>
@@ -93,7 +92,11 @@ session_start();
                                     <input type="text" class="form-control date_flatpicker" placeholder="Date Picker">
                                 </div>
                             </fieldset>
+                            <button class="btn btn-success" onclick="get_sales_report_table();">ค้นหา</button>
+                            <button class="btn btn-info" onclick="printDiv('printable')">พิมพ์</button>
+
                         </div>
+
                     </div>
                     <div class="table-responsive border-bottom my-3">
                         <table id="table_main" class="table table-striped">
@@ -104,7 +107,6 @@ session_start();
                                     <th>รถที่จอง</th>
                                     <th>ชื่อลูกค้า</th>
                                     <th>สถานะ</th>
-                                    <th>Menu</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -117,6 +119,24 @@ session_start();
 
 
             <!-- MAIN BODY END -->
+        </div>
+
+
+        <div id="printable" style="display:none;">
+            <table id="table_main_print" class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>หมายเลขการจอง</th>
+                        <th>รถที่จอง</th>
+                        <th>ชื่อลูกค้า</th>
+                        <th>สถานะ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
         </div>
 
         <!-- Footer Section Start -->
@@ -138,5 +158,15 @@ session_start();
 </html>
 
 <script>
+function printDiv(divName){
+			var printContents = document.getElementById(divName).innerHTML;
+			var originalContents = document.body.innerHTML;
 
+			document.body.innerHTML = printContents;
+
+			window.print();
+
+			document.body.innerHTML = originalContents;
+
+		}
 </script>

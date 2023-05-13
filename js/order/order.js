@@ -140,22 +140,28 @@ function card_order_list(data = {}) {
         let price = v['price'];
         let seat = v['seat'];
         let payment_type = v['payment_type'];
+
+        let text_status_order = "";
         let button_html = '';
         if(order_st == '2'){
+            text_status_order = 'ยังไม่ชำระเงิน';
             if(payment_type == '1'){
-                button_html = `<button data-id="${v['order_id']}" class="btn btn-primary float-end" onclick="modal_upload_pic(this);">ชำระเงิน</button>`;      
+                button_html = `<button data-id="${v['order_id']}" class="btn btn-primary float-end" onclick="modal_upload_pic(this);">ชำระเงิน</button>`;       
             }else{
                 button_html = `<button data-id="${v['order_id']}" class="btn btn-primary float-end" onclick="modal_upload_pic(this);">ชำระค่ามัดจำ</button>`;      
             }
+        }else if(order_st == '1'){
+            text_status_order = 'ยืนยันแล้ว';
+            button_html = `<button data-id="${v['order_id']}" class="btn btn-info float-end" onclick="modal_view_order(this);">ตรวจสอบ</button>`;
         }else{
-            button_html = `<button data-id="${v['order_id']}" class="btn btn-info float-end" onclick="modal_upload_pic(this);">ตรวจสอบ</button>`;
+            text_status_order ='รอการยืนยัน';
         }
         html += `
             <div class="col">
                 <div class="card">
                     <img style="" src="${pic}" />
                     <div class="card-body">
-                        <h5 class="card-title">หมายเลขการจอง : ${order_number}</h5>
+                        <h5 class="card-title">หมายเลขการจอง : ${order_number} (${text_status_order})</h5>
                         <div class="row">
                             <div class="col col-md-4 text-end"> ยี่ห้อ :</div>
                             <div class="col col-md-8">${brand}</div>
@@ -227,16 +233,148 @@ function ajax_cancel_order(data = {}) {
     });
 }
 
+async function modal_view_order(e = null) {
+    let ID = $(e).attr('data-id');
+    let data = {'ID' : ID}
+    let res = await ajax_get_view_order(data);
+    modal_view_success_order(res);
+
+    html_prepare_print_order(res);
+}
+
+function ajax_get_view_order(data) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            type: "post",
+            url: "php/order/get_view_order.php",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                resolve(response);
+            }
+        });
+    });
+}
+function modal_view_success_order(data = {}) {
+    $('#modal_view_success_order').remove();
+    let pic = data['payment_pic'];
+    let order_no = data['order_number'];
+    let date_start = data['date_start'];
+    let date_end = data['date_end'];
+    let plate = data['plate'];
+    let model = data['model'];
+    let brand = data['brand'];
+    let price = data['price'];
+
+    let d_name = data['driver_name'];
+    let d_lname = data['driver_lname'];
+    let d_phone = data['driver_phone'];
+
+    html = `
+    <!-- Modal -->
+    <div class="modal fade " id="modal_view_success_order" tabindex="-1" aria-labelledby="modal_view_success_orderLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modal_view_success_orderLabel">View Order</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <div class="container">
+            
+                <div>
+                    <label for="basic-url" class="form-label">รายละเอียดการจอง</label>
+                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขจอง : ${order_no}</label></div>
+                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >จองวันที่  : ${date_start} ถึง ${date_end}</label></div>
+                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ยี่ห้อ : ${brand}</label></div>
+                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >รุ่น : ${model}</label></div>
+                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ราคา : ${price}</label></div>
+                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ชื่อคนขับ : ${d_name} ${d_lname}</label></div>
+                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ติดต่อคนขับ : ${d_phone}</label></div>
+
+
+                </div>
+                
+                
+                <label for="basic-url" class="form-label">หลักฐานการชำระเงิน</label>
+                <div style="width:100%">
+                    <img id="blah" src="${pic}" style="width: 100%;" />
+                </div>
+                
+            </div>
+        </div>
+            <div class="modal-footer">                
+                <button type="button" class="btn btn-secondary" onclick="printDiv('print-order-detail')" data-bs-dismiss="modal">Print</button>
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-danger" onclick="cancel_order(this);">Cancel Order</button>
+                <button type="button" class="btn btn-primary" onclick="save_upload_order(this);">Save changes</button>
+            </div>
+            </div>
+        </div>
+    </div>
+    `;
+    $("body").append(html);
+    $("#modal_view_success_order").modal("show");
+    $(".inp_file").resizeImg({
+        mode: 1,
+        val: 800, // 800px
+    })
+    $(".inp_file").change(function(){
+        readURL(this);
+    });
+}
+
+function html_prepare_print_order(data ={}) {
+    let order_no = data['order_number'];
+    let date_start = data['date_start'];
+    let date_end = data['date_end'];
+    let plate = data['plate'];
+    let model = data['model'];
+    let brand = data['brand'];
+    let price = data['price'];
+    let d_name = data['driver_name'];
+    let d_lname = data['driver_lname'];
+    let d_phone = data['driver_phone'];
+
+    let html = `
+        <div>ขอบคุณลูกค้า ที่จองรถกับเรา</div>
+        <div>หมายเลขการจอง ${order_no}</div>
+        <div>จองรถตั้งแต่วันที่ ${date_start}</div>
+        <div>สิ้นสุดวันที่ ${date_end}</div>
+        <div>รถยี่ห้อ ${brand}</div>
+        <div>รุ่น ${model}</div>
+        <div>จำนวนเงิน  ${price}</div>
+        <div>พนักงานขัยรถของคุณ ชื่อ  ${d_name} ${d_lname}</div>
+        <div>โทร.  ${d_phone}</div>
+
+    `;
+    $('#print-order-detail').html(html);
+}
+
 
 
 function readURL(input) {
   if (input.files && input.files[0]) {
       var reader = new FileReader();
-
       reader.onload = function (e) {
           $('#blah').attr('src', e.target.result);
       }
-
       reader.readAsDataURL(input.files[0]);
   }
+}
+
+
+async function printDiv(divName){
+    await new Promise(resolve => {
+        $('#modal_view_success_order').modal('hide');
+        setTimeout(resolve, 500);
+      });
+    
+      var printContents = document.getElementById(divName).innerHTML;
+      var originalContents = document.body.innerHTML;
+      document.body.innerHTML = printContents;
+      window.print();
+      document.body.innerHTML = originalContents;
+
 }

@@ -80,60 +80,22 @@ session_start();
         <div class="conatiner-fluid content-inner mt-n5 py-0">
             <!-- MAIN BODY START -->
 
-            <!-- <div class="mt-5">
-                <div class="card p-3">
-                    <div class="table-responsive border-bottom my-3">
-                        <table id="table_main" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>หมายเลขจอง</th>
-                                    <th>ยี่ห้อรถ</th>
-                                    <th>ประเภท</th>
-                                    <th>ที่นั่ง</th>
-                                    <th>ราคา</th>
-                                    <th>วันที่รับรถ</th>
-                                    <th>สถานะ</th>
-                                    <th>เมนู</th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-
-                        </table>
-                    </div>
-                </div>
-
-            </div> -->
+           
             <div class="container mt-5">
                 <div class="row row-cols-1 row-cols-md-2 order-list">
-                    <!-- <div class="col">
-                        <div class="card">
-                            <img style="height:250px;" src="${pic}" />
-                            <div class="card-body">
-                                <h5 class="card-title">รถตู้ 1</h5>
-                                <div class="row">
-                                    <div class="col col-md-4 text-end"> ยี่ห้อ : </div>
-                                    <div class="col col-md-8"> ${v['brand']}</div>
+                   
 
-                                    <div class="col col-md-4 text-end"> รุ่น : </div>
-                                    <div class="col col-md-8"> ${v['model']}</div>
-
-                                    <div class="col col-md-4 text-end"> ที่นั่ง : </div>
-                                    <div class="col col-md-8"> ${v['seat']}</div>
-                                </div>
-                                <button data-id="${v['ID']}" class="btn btn-primary float-end" onclick="order_detail(this);">เช่าคันนี้</button>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
 
             <!-- MAIN BODY END -->
         </div>
 
+
+
+        <div id="print-order-detail" style="display:none;">
+
+        </div>
         <!-- Footer Section Start -->
         <?php include 'include/footermain.php'; ?>
         <!-- Footer Section End -->

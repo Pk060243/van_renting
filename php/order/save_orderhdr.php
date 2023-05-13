@@ -56,8 +56,6 @@ while ($row = $result_price->fetch_assoc()) {
 }
 
 
-
-
 // แปลง Date_rent จากฟอร์แมต 31/12/2023 ให้เป็น 2023-12-31 เพิ่มเซฟเข้า Database
 $start_date = DateTime::createFromFormat('d/m/Y', $date_from);
 $formattedDate = $start_date->format('Y-m-d');
@@ -67,6 +65,28 @@ $end_date = DateTime::createFromFormat('d/m/Y', $date_to);
 $formattedDate = $end_date->format('Y-m-d');
 $date_to = $formattedDate;
 
+
+//เช็คข้อมูล ว่าวันที่ลูกค้าเลือก ว่างหรือไม่
+$sql_ava_date = "
+    SELECT 1
+        FROM order_header
+    WHERE 1
+    AND '$date_from' <= date_end 
+    AND '$date_to' >= date_start 
+    AND van_id = '$van_id'
+    AND st != '0' ";
+$result_price = mysqli_query($con, $sql_ava_date) or die(mysqli_error($con));
+$have_in_order = array();
+while ($row = $result_price->fetch_assoc()) {
+    $have_in_order = $row;
+    // print_r($row);
+    // // $sql_ava_date = $row['price'];
+}
+if(sizeof($have_in_order)){ //เช็คว่า รถคันนี้ ในช่วงเวลานี้ มีคนจองแล้วหรือไม่
+    $arr_res = array('st' => '0', 'text' => 'รถคันนี้ ถูกจองแล้วในช่วงเวลาที่คุณเลือก กรุณาเลือกช่วงเวลาอื่น หรือรถคันอื่น');
+    echo json_encode($arr_res);
+    exit;
+}
 
 $order_no = get_order_number();
 $order_date = date('Y-m-d H:m');
@@ -80,7 +100,6 @@ INSERT INTO `order_header`(
     `order_number`,
     `order_date`,
     `order_time`,
-
     `customer_id`,
     `van_id`,
     `driver_id`,

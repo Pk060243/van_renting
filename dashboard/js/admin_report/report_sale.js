@@ -89,4 +89,5 @@ function  html_table_sale_report(data = {}) {
     }
     
     $('#table_main tbody').html(html);
+    $('#table_main_print tbody').html(html);
 }
