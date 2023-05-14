@@ -1,14 +1,13 @@
 <?php
 include '../../core/conn.php';
 
-$ID = $_POST['ID'];
 $sql = "
-    SELECT * FROM `van` WHERE `ID` = '$ID';
+    SELECT * FROM `van_type` WHERE 1;
 ";
 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
 while ($row = $result->fetch_assoc()) {
 
-    $arr_data = $row;
+    $arr_data[] = $row;
 }
 echo json_encode($arr_data);
 

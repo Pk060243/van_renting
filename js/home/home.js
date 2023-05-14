@@ -24,8 +24,10 @@ function ajax_get_van_table(data = {}) {
   });
 }
 function html_admin_main_van(data) {
+
   let html = "";
   if (data["st"] == "1") {
+    console.log(sessionStorage);
     $.each(data["data"], function (i, v) {
       let test = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII`;
       let pic = v["pic"];
@@ -34,7 +36,7 @@ function html_admin_main_van(data) {
         <div class="card">
         <img style="height:250px;"src="${pic}" />
             <div class="card-body">
-                <h5 class="card-title">รถตู้ 1</h5>
+                <h5 class="card-title">${v["brand"]}</h5>
                 <div class="row">
                     <div class="col col-md-4 text-end"> ยี่ห้อ : </div>
                     <div class="col col-md-8"> ${v["brand"]}</div>
@@ -94,7 +96,8 @@ function modal_order_detail(data = {}) {
     price_id = v["price_id"];
     price_name = v["price_name"];
     price = v["price"];
-  });
+    type_name = v["type_name"];
+});
   $("#modal_order_detail").remove();
   html = "";
   html = `
@@ -137,7 +140,7 @@ function modal_order_detail(data = {}) {
                 
                                     <label for="basic-url" class="form-label">ประเภท</label>
                                     <div class="input-group mb-3">
-                                        <input type="text" class="form-control inp_type" id="" aria-describedby="basic-addon3" value="${type}">
+                                        <input type="text" class="form-control inp_type" id="" aria-describedby="basic-addon3" value="${type_name}">
                                     </div>
                                 </div>
                                 <div class="col">
@@ -228,6 +231,10 @@ async function save_order_van(e = null) {
       window.location.href = "order.php";
     }else if(res["st"] == "0"){
       alert(res['text']);
+    }else if(res["st"] == "-1"){
+      alert('กรุณาลงชื่อเข้าสู่ระบบ');
+      window.location.href = "sign-in.php";
+
     }
       
     }

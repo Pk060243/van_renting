@@ -352,5 +352,8 @@ Index Of Script
     }
 
     
+    sessionStorage.setItem('colorcustom-mode', 'theme-color-blue')
+    sessionStorage.setItem('colorcustomchart-mode', '#00C3F9')
+    sessionStorage.setItem('colorcustominfo-mode', '#573BFF')
 
 })()

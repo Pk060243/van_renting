@@ -1,4 +1,9 @@
 <?php
+if(!isset($_SESSION['ID'])){
+    $arr_res = array('st' => '-1');
+    echo json_encode($arr_res);
+    exit;
+}
 function get_order_number(){
     include '../../function/conn.php';
     //สร้างหมายเลขการจอง

@@ -25,7 +25,7 @@ $sql = "
     FROM
         `order_header`
         JOIN van ON van.ID = order_header.van_id
-        JOIN driver ON driver.ID = order_header.driver_id
+        LEFT JOIN driver ON driver.ID = order_header.driver_id
 
         WHERE order_header.`ID` = '$ID';
 ";

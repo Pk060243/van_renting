@@ -59,14 +59,13 @@
                               </svg>
                               <h4 class="logo-title ms-3">Hope UI</h4>
                            </a> -->
-                           <h2 class="mb-2 text-center">Customers Sign Up</h2>
-                           <p class="text-center">Create your account.</p>
+                           <h2 class="mb-2 text-center">สมัครสมาชิค !</h2>
                            <div class="row">
                               <div class="col-sm-12 col-lg-12">
                                  <div class="card">
                                     <div class="card-header d-flex justify-content-between">
                                        <div class="header-title">
-                                          <h4 class="card-title">Signing up form</h4>
+                                          <h4 class="card-title">กรอกช้อมูล</h4>
                                        </div>
                                     </div>
                                     <div class="card-body">
@@ -79,7 +78,7 @@
                                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
                                                       </svg>
                                                    </div>
-                                                   <span class="dark-wizard">Account</span>
+                                                   <span class="dark-wizard">บัญชีผูใช้</span>
                                                 </a>
                                              </li>
                                              <li id="personal" class="mb-2 col-lg-3 col-md-6 text-start">
@@ -89,7 +88,7 @@
                                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                                                       </svg>
                                                    </div>
-                                                   <span class="dark-wizard">Personal</span>
+                                                   <span class="dark-wizard">ข้อมูล</span>
                                                 </a>
                                              </li>
                                              <li id="payment" class="mb-2 col-lg-3 col-md-6 text-start">
@@ -100,7 +99,7 @@
                                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z" />
                                                       </svg>
                                                    </div>
-                                                   <span class="dark-wizard">Image</span>
+                                                   <span class="dark-wizard">รูปบัตรประชาชน</span>
                                                 </a>
                                              </li>
                                              <li id="confirm" class="mb-2 col-lg-3 col-md-6 text-start">
@@ -110,7 +109,7 @@
                                                          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
                                                       </svg>
                                                    </div>
-                                                   <span class="dark-wizard">Finish</span>
+                                                   <span class="dark-wizard">เรียบร้อยแล้ว</span>
                                                 </a>
                                              </li>
                                           </ul>
@@ -119,26 +118,26 @@
                                              <div class="form-card text-start">
                                                 <div class="row">
                                                    <div class="col-7">
-                                                      <h3 class="mb-4">Account Information:</h3>
+                                                      <h3 class="mb-4">ข้อมูลบัญชีผู้ใช้</h3>
                                                    </div>
                                                    <div class="col-5">
-                                                      <h2 class="steps">Step 1 - 4</h2>
+                                                      <h2 class="steps">ขั้นที่ 1 - 4</h2>
                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                    <div class="col-md-6">
                                                       <div class="form-group">
                                                          <label class="form-label">Username: *</label>
-                                                         <input type="text" class="form-control inp-user" name="" placeholder="Username" autocomplete="off"/>
+                                                         <input type="text" class="form-control inp-user" name="" placeholder="Username" autocomplete="off" />
                                                       </div>
                                                    </div>
                                                    <div class="col-md-6">
                                                       <div class="form-group">
                                                          <label class="form-label">Password: *</label>
-                                                         <input type="password" class="form-control inp-pwd" name="" placeholder="password" autocomplete="off"/>
+                                                         <input type="password" class="form-control inp-pwd" name="" placeholder="password" autocomplete="off" />
                                                       </div>
                                                    </div>
-                                                   
+
                                                 </div>
                                              </div>
                                              <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next">Next</button>
@@ -147,56 +146,56 @@
                                              <div class="form-card text-start">
                                                 <div class="row">
                                                    <div class="col-7">
-                                                      <h3 class="mb-4">Personal Information:</h3>
+                                                      <h3 class="mb-4">ข้อมูลของท่าน:</h3>
                                                    </div>
                                                    <div class="col-5">
-                                                      <h2 class="steps">Step 2 - 4</h2>
+                                                      <h2 class="steps">ขั้นที่ 2 - 4</h2>
                                                    </div>
                                                 </div>
                                                 <div class="row">
                                                    <div class="col-md-6">
                                                       <div class="form-group">
-                                                         <label class="form-label">First Name: *</label>
-                                                         <input type="text" class="form-control inp-fname" name="fname" placeholder="First Name" />
+                                                         <label class="form-label">ชื่อจริง: *</label>
+                                                         <input type="text" class="form-control inp-fname" name="fname" placeholder="ชื่อจริง" />
                                                       </div>
                                                    </div>
                                                    <div class="col-md-6">
                                                       <div class="form-group">
-                                                         <label class="form-label">Last Name: *</label>
-                                                         <input type="text" class="form-control inp-lname" name="lname" placeholder="Last Name" />
+                                                         <label class="form-label">นามสกุล: *</label>
+                                                         <input type="text" class="form-control inp-lname" name="lname" placeholder="นามสกุล" />
                                                       </div>
                                                    </div>
                                                    <div class="col-md-6">
                                                       <div class="form-group">
                                                          <label class="form-label">Email: *</label>
-                                                         <input type="text" class="form-control inp-email" name="email" placeholder="Contact No." />
+                                                         <input type="text" class="form-control inp-email" name="email" placeholder="Email" />
                                                       </div>
                                                    </div>
                                                    <div class="col-md-6">
                                                       <div class="form-group">
-                                                         <label class="form-label">Telephone.: *</label>
-                                                         <input type="text" class="form-control inp-phone" name="phone" placeholder="Alternate Contact No." />
+                                                         <label class="form-label">เบอร์โทรศัพท์.: *</label>
+                                                         <input type="text" class="form-control inp-phone" name="phone" placeholder="เบอร์โทรศัทพ์" />
                                                       </div>
                                                    </div>
-                                                   
+
                                                 </div>
                                              </div>
                                              <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next">Next</button>
                                              <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-end me-1" value="Previous">Previous</button>
                                           </fieldset>
-                                          
+
                                           <fieldset>
                                              <div class="form-card text-start">
                                                 <div class="row">
                                                    <div class="col-7">
-                                                      <h3 class="mb-4">Image Upload:</h3>
+                                                      <h3 class="mb-4">อัพโหลดรูปบัตรประชาชนหรือใบขับขี่ของท่าน:</h3>
                                                    </div>
                                                    <div class="col-5">
-                                                      <h2 class="steps">Step 3 - 4</h2>
+                                                      <h2 class="steps">ขั้นที่ 3 - 4</h2>
                                                    </div>
                                                 </div>
                                                 <div class="form-group">
-                                                   <label class="form-label">Upload Your Photo:</label>
+                                                   <label class="form-label">**ถ่ายคู่กับตัวท่าน หน้าลูกค้ากับหน้าบัตรต้องตรงกัน**:</label>
                                                    <input type="file" class="form-control inp-pic" name="pic" accept="image/*">
 
                                                 </div>
@@ -215,20 +214,21 @@
                                                       <h3 class="mb-4 text-left">Finish:</h3>
                                                    </div>
                                                    <div class="col-5">
-                                                      <h2 class="steps">Step 4 - 4</h2>
+                                                      <h2 class="steps">ขั้นที่ 4 - 4</h2>
                                                    </div>
                                                 </div>
                                                 <br><br>
                                                 <h2 class="text-center text-success"><strong>SUCCESS !</strong></h2>
                                                 <br>
                                                 <div class="row justify-content-center">
-                                                   <div class="col-3"> <img src="../../assets/images/pages/img-success.png" class="img-fluid" alt="fit-image"> </div>
+                                                   <div class="text-center col-7">
+                                                      <h5 class="text-center purple-text">สมัครสมาชิกเรียบร้อยแล้ว เข้าสู่ระบบได้เลย!</h5>
+                                                   </div>
                                                 </div>
+
                                                 <br><br>
                                                 <div class="row justify-content-center">
-                                                   <div class="text-center col-7">
-                                                      <h5 class="text-center purple-text">You Have Successfully Signed Up</h5>
-                                                   </div>
+                                                   <div class="col-3"><a class="btn btn-primary" href="sign-in.php">เข้าสู่ระบบ</a></div>
                                                 </div>
                                              </div>
                                           </fieldset>
@@ -285,10 +285,10 @@
    <!-- App Script -->
    <script src="assets/js/hope-ui.js" defer></script>
    <script src="js/sign_up.js"></script>
-         
-   </body>
+
+</body>
 
 </html>
 <script>
-   
+
 </script>

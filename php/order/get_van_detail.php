@@ -16,10 +16,13 @@ $sql = "
         `pic`,
         `st`,
         price.price_name,
-        price.price
+        price.price,
+        van_type.type_name
+
     FROM
         `van`
     LEFT JOIN price ON price.type_van = van.type
+    LEFT JOIN van_type ON van_type.ID = van.type
     WHERE van.`ID` = '$ID';
 ";
 $result = mysqli_query($con, $sql) or die(mysqli_error($con));

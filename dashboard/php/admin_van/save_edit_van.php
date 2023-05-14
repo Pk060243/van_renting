@@ -8,6 +8,7 @@ $model = $_POST['model'];
 $color = $_POST['color'];
 $seat = $_POST['seat'];
 $type = $_POST['type'];
+$pic = $_POST['pic'];
 
 
 $sql = "
@@ -19,7 +20,8 @@ $sql = "
     `color` = '$color',
     `seat` = '$seat',
     `plate` = '$plate',
-    `type` = '$type'
+    `type` = '$type',
+    `pic` = '$pic'
   WHERE
     `ID` = '$ID'
 

@@ -52,8 +52,27 @@ function html_table_order(data = {}) {
     $("#table_main").DataTable();
 }
 
-function modal_upload_pic(e = null) {
+async function modal_upload_pic(e = null) {
     let ID = $(e).attr('data-id');
+    let data = {'ID' : ID}
+    let res = await ajax_get_view_order(data);
+    console.log(res)
+   
+    let pic = res['payment_pic'];
+    let order_no = res['order_number'];
+    let date_start = res['date_start'];
+    let date_end = res['date_end'];
+    let plate = res['plate'];
+    let model = res['model'];
+    let brand = res['brand'];
+    let price = res['price'];
+    let html_deposit
+    if( res['payment_type'] == '1'){
+        html_deposit = '';
+    }else if( res['payment_type'] == '2'){
+        html_deposit = `<div style="margin-left:10px;"><label for="basic-url" class="form-label" >ค่ามัดจำ : ${price * 0.2}</label></div>`;
+    }
+
     $('#modal_upload_payment').remove();
 
     html = `
@@ -67,8 +86,23 @@ function modal_upload_pic(e = null) {
             </div>
             <div class="modal-body">
                 <div class="container">
-                    <div class="col">
-                      <label for="basic-url" class="form-label">รูป</label>
+<div class ="row">
+                    <div class ="col-md-6">
+                        <label for="basic-url" class="form-label">รายละเอียดการจอง</label>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขจอง : ${order_no}</label></div>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >จองวันที่  : ${date_start} ถึง ${date_end}</label></div>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ยี่ห้อ : ${brand}</label></div>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >รุ่น : ${model}</label></div>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ราคา : ${price}</label></div>
+                            ${html_deposit}
+                    </div>
+                    <div class ="col-md-6">
+                        <img src="assets/images/paymentpic.png" width="350" height="350">
+                    </div>
+                
+                </div>    
+                <div class="col">
+                      <label for="basic-url" class="form-label">อัพโหลดหลักฐานการชำระเงิน</label>
                       <div class="input-group mb-3">
                           <input type="file" class="form-control inp_file" id="" aria-describedby="basic-addon3">
                       </div>
@@ -153,8 +187,13 @@ function card_order_list(data = {}) {
         }else if(order_st == '1'){
             text_status_order = 'ยืนยันแล้ว';
             button_html = `<button data-id="${v['order_id']}" class="btn btn-info float-end" onclick="modal_view_order(this);">ตรวจสอบ</button>`;
-        }else{
+        }else if(order_st == '3'){
             text_status_order ='รอการยืนยัน';
+            button_html = `<button data-id="${v['order_id']}" class="btn btn-info float-end" onclick="modal_view_order(this);">ตรวจสอบ</button>`;
+        }else if(order_st == '0'){
+            text_status_order ='ถูกปฎิเสธ ';
+            button_html = `<button data-id="${v['order_id']}" class="btn btn-info float-end" onclick="modal_view_order(this);">ตรวจสอบ</button>`;
+
         }
         html += `
             <div class="col">
@@ -291,8 +330,6 @@ function modal_view_success_order(data = {}) {
                         <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ราคา : ${price}</label></div>
                         <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ชื่อคนขับ : ${d_name} ${d_lname}</label></div>
                         <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ติดต่อคนขับ : ${d_phone}</label></div>
-
-
                 </div>
                 
                 

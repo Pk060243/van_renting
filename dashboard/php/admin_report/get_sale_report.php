@@ -31,6 +31,11 @@ $date_to = $_POST['date_to'];
 
 if ($_POST['date_to'] != '') {
     if ($_POST['date_from'] != '') {
+        $start_date = DateTime::createFromFormat('d/m/Y', $date_from);
+        $formattedDate = $start_date->format('Y-m-d');
+        $date_from = $formattedDate;
+
+
         $end_date = DateTime::createFromFormat('d/m/Y', $date_to);
         $formattedDate = $end_date->format('Y-m-d');
         $date_to = $formattedDate;
@@ -45,6 +50,7 @@ if ($_POST['date_to'] != '') {
         $sql .= "AND order_header.order_date BETWEEN  '$date_from' and  '$date_from'";
     }
 }
+
 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
 if(mysqli_num_rows($result) >= 1){
     while ($row = $result->fetch_assoc()) {

@@ -93,10 +93,10 @@ async function modal_approve_order(data = {}){
     html_select_driver += '<select class="form-select sel_driver ">';
     html_select_driver += html_select_driver_option;
     html_select_driver += '</select>';
-
+console.log(data);
     let ID = data['order_id'];
     let pic = data['payment_pic'];
-    let order_no = data['order_nmber'];
+    let order_no = data['order_number'];
     let van_plate = data['van_plate'];
     let date_start = data['date_start'];
     let date_end = data['date_end'];
@@ -127,7 +127,7 @@ async function modal_approve_order(data = {}){
                     
                         <div>
                             <label for="basic-url" class="form-label">รายละเอียดการจอง</label>
-                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขจอง : ${order_no}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขจองxxx : ${order_no}</label></div>
                                 <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ทะเบียนรถ : ${van_plate}</label></div>
                                 <div style="margin-left:10px;"><label for="basic-url" class="form-label" >จองวันที่ : ${date_start} ถึง ${date_end}</label></div>
                                 <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ชื่อลูกค้า : ${customer_full_name}</label></div>

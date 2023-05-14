@@ -122,7 +122,11 @@ session_start();
         </div>
 
 
+        <!-- ส่วนนี้ เอาไว้ปริ้น -->
         <div id="printable" style="display:none;">
+
+            <div class="col-md-12" style="text-align:center;">รายงาน ยอดขาย</div>
+
             <table id="table_main_print" class="table table-striped">
                 <thead>
                     <tr>
@@ -136,8 +140,9 @@ session_start();
                 <tbody>
                 </tbody>
             </table>
-
         </div>
+        <!-- ส่วนนี้ เอาไว้ปริ้น -->
+
 
         <!-- Footer Section Start -->
         <?php include 'include/footermain.php'; ?>
@@ -158,15 +163,15 @@ session_start();
 </html>
 
 <script>
-function printDiv(divName){
-			var printContents = document.getElementById(divName).innerHTML;
-			var originalContents = document.body.innerHTML;
+    function printDiv(divName) {
+        var printContents = document.getElementById(divName).innerHTML;
+        var originalContents = document.body.innerHTML;
 
-			document.body.innerHTML = printContents;
+        document.body.innerHTML = printContents;
 
-			window.print();
+        window.print();
 
-			document.body.innerHTML = originalContents;
+        document.body.innerHTML = originalContents;
 
-		}
+    }
 </script>

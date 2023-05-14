@@ -68,8 +68,29 @@ function ajax_van_delete(data = {}) {
   });
 }
 
+function ajax_get_van_type(data = {}) {
+  return new Promise(function (resolve, reject) {
+    $.ajax({
+      type: "post",
+      url: "php/admin_van/get_select_van_type.php",
+      data: data,
+      dataType: "json",
+      success: function (response) {
+        resolve(response);
+      },
+    });
+  });
+}
 // save add van
-function modal_add_van() {
+async function modal_add_van() {
+  let type_select_data = await ajax_get_van_type();
+  let html_selct_type_option = '';
+  $.each(type_select_data, function (i, v) { 
+    html_selct_type_option += `
+    <option value="${v['ID']}">${v['type_name']}</option>
+    `;
+  });
+
   $("#modal_add_van").remove();
   let html = "";
   html = `
@@ -112,7 +133,9 @@ function modal_add_van() {
     
                           <label for="basic-url" class="form-label">ประเภท</label>
                           <div class="input-group mb-3">
-                              <input type="text" class="form-control inp_type" id="" aria-describedby="basic-addon3">
+                              <select class="form-select inp_type">
+                                ${html_selct_type_option}
+                              </select>
                           </div>
                         </div>
                         <div class="col">
@@ -214,8 +237,15 @@ function ajax_get_edit_van(data = {}) {
     });
   });
 }
-function modal_edit_van(data = {}) {
+async function modal_edit_van(data = {}) {
   $("#modal_edit_van").remove();
+  let type_select_data = await ajax_get_van_type();
+  let html_selct_type_option = '';
+  $.each(type_select_data, function (i, v) { 
+    html_selct_type_option += `
+    <option value="${v['ID']}">${v['type_name']}</option>
+    `;
+  });
   let ID = !!data["ID"] ? data["ID"] : "";
   let plate = !!data["plate"] ? data["plate"] : "";
   let brand = !!data["brand"] ? data["brand"] : "";
@@ -265,7 +295,9 @@ function modal_edit_van(data = {}) {
     
                         <label for="basic-url" class="form-label">ประเภท</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control inp_edit_type" id="" aria-describedby="basic-addon3" value="${type}">
+                          <select class="form-select inp_edit_type">
+                            ${html_selct_type_option}
+                          </select>                        
                         </div>
                       </div>
                       <div class="col">
@@ -274,7 +306,7 @@ function modal_edit_van(data = {}) {
                             <input type="file" class="form-control inp_file" id="" aria-describedby="basic-addon3">
                         </div>
                         <div class="test" style="width:100%">
-                          <img id="blah" src="" style="width: 100%;" />
+                          <img id="blah" src="${pic}" style="width: 100%;" />
                         </div>
                       </div>
                     </div>
@@ -298,6 +330,8 @@ function modal_edit_van(data = {}) {
   $(".inp_file").change(function(){
     readURL(this);
   });
+
+  $('.inp_edit_type').val(type)
 }
 async function save_edit_van(e = null) {
   let ID = $(e).closest("#modal_edit_van").attr("data-id");
@@ -308,6 +342,7 @@ async function save_edit_van(e = null) {
   let color = $(".inp_edit_color").val();
   let seat = $(".inp_edit_seat").val();
   let type = $(".inp_edit_type").val();
+  let pic = $("#blah").attr('src');
 
   let data = {
     ID: ID,
@@ -317,6 +352,7 @@ async function save_edit_van(e = null) {
     color: color,
     seat: seat,
     type: type,
+    pic : pic,
   };
   let res = await ajax_save_edit_van(data);
   if (res["st"] == "1") {

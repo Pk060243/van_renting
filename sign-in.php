@@ -1,6 +1,9 @@
 
 
-
+<?php
+session_start();
+session_destroy();
+?>
 <!doctype html>
 <html lang="en" dir="ltr">
   <head>
@@ -86,7 +89,7 @@
                               </div>
                               
                               <p class="mt-3 text-center">
-                                 Don’t have an account? <a href="sign-up.html" class="text-underline">Click here to sign up.</a>
+                                 Don’t have an account? <a href="sign-up.php" class="text-underline">Click here to sign up.</a>
                               </p>
                            </form>
                         </div>
