@@ -1,5 +1,7 @@
 $(document).ready(function () {
   get_user_talbe();
+  get_customer_talbe();
+
 });
 async function get_user_talbe() {
   let res = await ajax_get_user_table();
@@ -53,6 +55,99 @@ function html_admin_main_user(data) {
   $("#table_main").DataTable();
   
 }
+async function get_customer_talbe(){
+    let res = await ajax_get_customer_table();
+    let html = html_customer_table(res);
+}
+function ajax_get_customer_table(data = {}){
+  return new Promise(function (resolve, reject) {
+    $.ajax({
+      type: "post",
+      url: "php/admin_user/get_cutomer_table.php",
+      data: data,
+      dataType: "json",
+      success: function (response) {
+        resolve(response);
+      },
+    });
+  });
+}
+async function html_customer_table(data={}){
+  console.log(data);
+  html = '';
+  $.each(data['data'], function (i, v) {
+    let html_btn = `
+      <div class="">
+                  
+        <button type="button" class="btn btn-primary" data-id="${v["ID"]}" onclick="showpic(this);"> <i class="bi bi-file-image"></i> </button>
+
+      </div>
+    `
+    html += `
+        <tr>
+            <td align="center">${i + 1}</td>
+            <td align="center">${v["Fname"]+' '+v['Lname']}</td>
+            <td align="center">${v["phone"]}</td>
+            <td align="center">${v["email"]}</td>
+            <td align="center">${html_btn}</td>
+        </tr>
+        `;
+  });
+
+  await $('#table_customer tbody').html(html);
+  $("#table_customer").DataTable();
+
+}
+
+async function showpic(e=null) {
+  let ID = $(e).attr('data-id');
+  let data = {'ID' : ID}
+  let res = await ajax_get_pic_from_id(data);
+  console.log(res);
+  html_show_pic(res);
+}
+function ajax_get_pic_from_id(data = {}) {  
+  return new Promise(function (resolve, reject) {
+    $.ajax({
+      type: "post",
+      url: "php/admin_user/get_pic_from_id.php",
+      data: data,
+      dataType: "json",
+      success: function (response) {
+        resolve(response);
+      },
+    });
+  });
+}
+function html_show_pic(data = {}) {
+  html = '';
+  $('#show_pic').remove();
+
+  console.log(data);
+  html = `
+    <!-- Modal -->
+    <div class="modal fade" id="show_pic" tabindex="-1" role="dialog" aria-labelledby="show_picLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="show_picLabel"> รูปบัตรประชาชนลูกค้า </h5>
+          </div>
+          <div class="modal-body">
+            <img width="470"src = ${data['id_card_pic']}>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick ="$('#show_pic').modal('hide');">Close</button>
+          </div>
+        </div>
+      </div>
+  
+  `;
+  $('body').append(html);
+  $('#show_pic').modal('show');
+}
+
+
+
 
 // delete user
 async function user_delete(e) {

@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 if(!isset($_SESSION['ID'])){
     $arr_res = array('st' => '-1');
     echo json_encode($arr_res);
@@ -6,7 +8,7 @@ if(!isset($_SESSION['ID'])){
 }
 function get_order_number(){
     include '../../function/conn.php';
-    //สร้างหมายเลขการจอง
+    //สร้างหมายเลขการเช่า
     $running_date = date('ym'); //เลือก order ที่ขึ้นต้นด้วย "ปีเดือน Ex. 2301"
     $sql_order_no = "
         SELECT `order_number` from order_header Where order_number like '$running_date%' Order By order_date DESC;
@@ -31,7 +33,7 @@ function get_order_number(){
 
 
 include '../../function/conn.php';
-session_start();
+
 date_default_timezone_set('Asia/Bangkok'); //ตั้งเวลาเป้นประเทศไทย
 $van_id = $_POST['van_id'];
 $date_from = $_POST['date_from'];
@@ -87,8 +89,8 @@ while ($row = $result_price->fetch_assoc()) {
     // print_r($row);
     // // $sql_ava_date = $row['price'];
 }
-if(sizeof($have_in_order)){ //เช็คว่า รถคันนี้ ในช่วงเวลานี้ มีคนจองแล้วหรือไม่
-    $arr_res = array('st' => '0', 'text' => 'รถคันนี้ ถูกจองแล้วในช่วงเวลาที่คุณเลือก กรุณาเลือกช่วงเวลาอื่น หรือรถคันอื่น');
+if(sizeof($have_in_order)){ //เช็คว่า รถคันนี้ ในช่วงเวลานี้ มีคนเช่าแล้วหรือไม่
+    $arr_res = array('st' => '0', 'text' => 'รถคันนี้ ถูกเช่าแล้วในช่วงเวลาที่คุณเลือก กรุณาเลือกช่วงเวลาอื่น หรือรถคันอื่น');
     echo json_encode($arr_res);
     exit;
 }

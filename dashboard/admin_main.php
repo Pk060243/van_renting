@@ -77,7 +77,7 @@ session_start();
                                         <th>ลูกค้า</th>
                                         <th>เบอร์ลูกค้า</th>
                                         <th>ราคา</th>
-                                        <th>เวลาจอง</th>
+                                        <th>เวลาเช่า</th>
                                         <th>สถานะ</th>
                                         <th>Menu</th>
                                     </tr>
@@ -103,7 +103,7 @@ session_start();
                                         <th>ลูกค้า</th>
                                         <th>เบอร์ลูกค้า</th>
                                         <th>ราคา</th>
-                                        <th>เวลาจอง</th>
+                                        <th>เวลาเช่า</th>
                                         <th>สถานะ</th>
                                         <th>Menu</th>
                                     </tr>

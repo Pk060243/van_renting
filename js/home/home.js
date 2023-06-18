@@ -32,7 +32,7 @@ function html_admin_main_van(data) {
       let test = `data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAIAQMAAAD+wSzIAAAABlBMVEX///+/v7+jQ3Y5AAAADklEQVQI12P4AIX8EAgALgAD/aNpbtEAAAAASUVORK5CYII`;
       let pic = v["pic"];
       html += `
-    <div class="col">
+      <div class="col">
         <div class="card">
         <img style="height:250px;"src="${pic}" />
             <div class="card-body">
@@ -50,7 +50,7 @@ function html_admin_main_van(data) {
                     <button data-id="${v["ID"]}" class="btn btn-primary float-end" onclick="order_detail(this);">เช่าคันนี้</button>
             </div>
         </div>
-    </div>
+      </div>
         `;
     });
   } else {
@@ -106,7 +106,7 @@ function modal_order_detail(data = {}) {
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modal_order_detailLabel">จองรถ</h5>
+                        <h5 class="modal-title" id="modal_order_detailLabel">เช่ารถ</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -153,6 +153,9 @@ function modal_order_detail(data = {}) {
                                     <div class="form-group">
                                         <input type="text" class="form-control date_flatpicker" placeholder="Date Picker">
                                     </div>
+
+                                    <h3>ราคาวันละ : ${price}</h3>
+                                    
                                     <div>
                                         <label for="basic-url" class="form-label">ประเภทการชำระเงิน</label>
                                     </div>
@@ -206,12 +209,12 @@ async function save_order_van(e = null) {
   };
   Swal.fire({
     title: 'ยืนยัน?',
-    text: "คุณยืนยันที่จะจองรถคันนี้หรือไม่",
+    text: "คุณยืนยันที่จะเช่ารถคันนี้หรือไม่",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
     cancelButtonColor: '#d33',
-    confirmButtonText: 'จองเลย!',
+    confirmButtonText: 'เช่าเลย!',
     cancelButtonText: 'ยกเลิก'
 
   }).then(async (result) => {
@@ -220,7 +223,7 @@ async function save_order_van(e = null) {
 
     if (res["st"] == "1") {
       alert(
-        "คุณได้ทำการจองรถเรียบร้อยแล้ว กรุณาชำระเงินและอัพโหลดหลักฐานภายใน 30 นาที"
+        "คุณได้ทำการเช่ารถเรียบร้อยแล้ว กรุณาชำระเงินและอัพโหลดหลักฐานภายใน 30 นาที"
       );
       $("#modal_order_detail").modal("hide");
       Swal.fire(
@@ -233,7 +236,7 @@ async function save_order_van(e = null) {
       alert(res['text']);
     }else if(res["st"] == "-1"){
       alert('กรุณาลงชื่อเข้าสู่ระบบ');
-      window.location.href = "sign-in.php";
+      // window.location.href = "sign-in.php";
 
     }
       

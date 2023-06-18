@@ -119,17 +119,17 @@ console.log(data);
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal_approve_orderLabel">ยืนยันการจอง</h5>
+                    <h5 class="modal-title" id="modal_approve_orderLabel">ยืนยันการเช่า</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="container">
                     
                         <div>
-                            <label for="basic-url" class="form-label">รายละเอียดการจอง</label>
-                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขจองxxx : ${order_no}</label></div>
+                            <label for="basic-url" class="form-label">รายละเอียดการเช่า</label>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขเช่าxxx : ${order_no}</label></div>
                                 <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ทะเบียนรถ : ${van_plate}</label></div>
-                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >จองวันที่ : ${date_start} ถึง ${date_end}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เช่าวันที่ : ${date_start} ถึง ${date_end}</label></div>
                                 <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ชื่อลูกค้า : ${customer_full_name}</label></div>
                                 <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เบอร์โทร : ${phone}</label></div>
                                 <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ราคา : ${price}</label></div>
@@ -178,7 +178,7 @@ function ajax_get_driver(){
 function confirm_order(e = null) {
     Swal.fire({
         title: 'ยืนยัน',
-        text: "คุณต้องการยืนยันการจองนี้หรือไม่",
+        text: "คุณต้องการยืนยันการเช่านี้หรือไม่",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -229,8 +229,8 @@ function ajax_approve_order(data ={}){
 //ปฎิเสธออเดอร์
 function denied_order(e = null) {
     Swal.fire({
-        title: 'ปฎิเสธการจอง',
-        text: 'คุณต้องการ "ปฎิเสธ" รายการจองนี้หรือไม่',
+        title: 'ปฎิเสธการเช่า',
+        text: 'คุณต้องการ "ปฎิเสธ" รายการเช่านี้หรือไม่',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -251,7 +251,7 @@ async function denied_approve_order(e= null){
     if(res['st'] == '1'){
         Swal.fire(
             'ปฎิเสธเรียบร้อย!',
-            'การปฎิเสธรายการจอง สำเร็จ',
+            'การปฎิเสธรายการเช่า สำเร็จ',
             'success'
         );
         $('#modal_approve_order').modal('hide');
@@ -356,17 +356,17 @@ function modal_view_approve_order(data = {}){
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="modal_view_approve_orderLabel">ยืนยันการจอง</h5>
+                    <h5 class="modal-title" id="modal_view_approve_orderLabel">ยืนยันการเช่า</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <div class="container">
                     
                         <div>
-                            <label for="basic-url" class="form-label">รายละเอียดการจอง</label>
-                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขจอง : ${order_no}</label></div>
+                            <label for="basic-url" class="form-label">รายละเอียดการเช่า</label>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขเช่า : ${order_no}</label></div>
                                 <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ทะเบียนรถ : ${van_plate}</label></div>
-                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >จองวันที่ : ${date_start} ถึง ${date_end}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เช่าวันที่ : ${date_start} ถึง ${date_end}</label></div>
                                 <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ชื่อลูกค้า : ${customer_full_name}</label></div>
                                 <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เบอร์โทร : ${phone}</label></div>
                                 <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ราคา : ${price}</label></div>

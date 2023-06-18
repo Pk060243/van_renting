@@ -64,7 +64,7 @@ function ajax_van_delete(data = {}) {
       success: function (response) {
         resolve(response);
       },
-    });
+    }); 
   });
 }
 
@@ -83,15 +83,19 @@ function ajax_get_van_type(data = {}) {
 }
 // save add van
 async function modal_add_van() {
-  let type_select_data = await ajax_get_van_type();
+  let type_select_data = await ajax_get_van_type(); // ดึงข้อมูลสำหรับช่อง select type van
+
+  //สร้าง html สำรหับ <select>
   let html_selct_type_option = '';
   $.each(type_select_data, function (i, v) { 
     html_selct_type_option += `
-    <option value="${v['ID']}">${v['type_name']}</option>
+      <option value="${v['ID']}">${v['type_name']}</option>
     `;
   });
+  //สร้าง html สำรหับ <select>
 
-  $("#modal_add_van").remove();
+
+  $("#modal_add_van").remove(); //ลบ Modal ที่ถูกสร้างขึ้นมาก่อนหน้า เพื่อป้องกันการเรียกซ้ำ Modal เดิม
   let html = "";
   html = `
         <!-- Modal -->
@@ -167,7 +171,9 @@ async function modal_add_van() {
     
 
   $("body").append(html);
-  $("#modal_add_van").modal("show");
+  $("#modal_add_van").modal("show"); // สั่งเปิด Modal
+
+  //เกี่ยวกับรูป
   $(".inp_file").resizeImg({
     mode: 1,
     val: 100, // 800px

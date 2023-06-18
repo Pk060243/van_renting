@@ -6,7 +6,6 @@ $(document).ready(function () {
 async function get_table_order(){
     let res = await ajax_get_table_order();
     console.log(res);
-    html_table_order(res);
     card_order_list(res);
 }
 function ajax_get_table_order(data = {}) {  
@@ -21,35 +20,6 @@ function ajax_get_table_order(data = {}) {
             }
         });
     });
-}
-
-function html_table_order(data = {}) {
-    let html = "";
-    $.each(data, function (i, v) {
-        html_btn = `
-                <div class="">
-                
-                <button type="button" class="btn btn-primary" data-id="${v['order_id']}" title="อัพโหลดหลักฐานชำระเงิน" onclick="modal_upload_pic(this);"><i class="fa fa-arrow-up-from-bracket"></i></button> 
-                <button type="button" class="btn btn-danger"> <i class="fa fa-trash"></i></button> 
-
-                </div>
-            `;
-        html += `
-            <tr>
-                <td align="center">${i + 1}</td>
-                <td align="center">${v["order_number"]}</td>
-                <td align="center">${v["brand"]}</td>
-                <td align="center">${v["type"]}</td>
-                <td align="center">${v["seat"]}</td>
-                <td align="center">${v["price"]}</td>
-                <td align="center">${v["date_start"]}</td>
-                <td align="center">${v["st"]}</td>
-                <td align="center">${html_btn}</td>
-            </tr>
-            `;
-    });
-    $("#table_main tbody").html(html);
-    $("#table_main").DataTable();
 }
 
 async function modal_upload_pic(e = null) {
@@ -86,11 +56,11 @@ async function modal_upload_pic(e = null) {
             </div>
             <div class="modal-body">
                 <div class="container">
-<div class ="row">
+            <div class ="row">
                     <div class ="col-md-6">
-                        <label for="basic-url" class="form-label">รายละเอียดการจอง</label>
-                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขจอง : ${order_no}</label></div>
-                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >จองวันที่  : ${date_start} ถึง ${date_end}</label></div>
+                        <label for="basic-url" class="form-label">รายละเอียดการเช่า</label>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขเช่า : ${order_no}</label></div>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เช่าวันที่  : ${date_start} ถึง ${date_end}</label></div>
                             <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ยี่ห้อ : ${brand}</label></div>
                             <div style="margin-left:10px;"><label for="basic-url" class="form-label" >รุ่น : ${model}</label></div>
                             <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ราคา : ${price}</label></div>
@@ -200,7 +170,7 @@ function card_order_list(data = {}) {
                 <div class="card">
                     <img style="" src="${pic}" />
                     <div class="card-body">
-                        <h5 class="card-title">หมายเลขการจอง : ${order_number} (${text_status_order})</h5>
+                        <h5 class="card-title">หมายเลขการเช่า : ${order_number} (${text_status_order})</h5>
                         <div class="row">
                             <div class="col col-md-4 text-end"> ยี่ห้อ :</div>
                             <div class="col col-md-8">${brand}</div>
@@ -233,8 +203,8 @@ async function cancel_order(e = null) {
         ID : ID,
     }
     Swal.fire({
-        title: 'ยกเลิกการจอง',
-        text: "คุณต้องการยกเลิกการจองนี้หรือไม่",
+        title: 'ยกเลิกการเช่า',
+        text: "คุณต้องการยกเลิกการเช่านี้หรือไม่",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -278,7 +248,7 @@ async function modal_view_order(e = null) {
     let res = await ajax_get_view_order(data);
     modal_view_success_order(res);
 
-    html_prepare_print_order(res);
+    html_prepare_print_order(res);// สร้างข้อมูลสำหรับปริ้น
 }
 
 function ajax_get_view_order(data) {
@@ -295,6 +265,7 @@ function ajax_get_view_order(data) {
     });
 }
 function modal_view_success_order(data = {}) {
+    console.log(data);
     $('#modal_view_success_order').remove();
     let pic = data['payment_pic'];
     let order_no = data['order_number'];
@@ -304,11 +275,35 @@ function modal_view_success_order(data = {}) {
     let model = data['model'];
     let brand = data['brand'];
     let price = data['price'];
+    let order_st = data['order_st'];
 
     let d_name = data['driver_name'];
     let d_lname = data['driver_lname'];
     let d_phone = data['driver_phone'];
 
+    $html_button = '';
+    if(order_st == '0'){
+        $html_button = `
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        `;
+    }else if(order_st == '1'){
+        $html_button = `
+            <button type="button" class="btn btn-secondary" onclick="printDiv('print-order-detail')" data-bs-dismiss="modal">Print</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" onclick="cancel_order(this);">Cancel Order</button>
+        `;
+    }else if(order_st == '2'){
+        $html_button = `
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" onclick="cancel_order(this);">Cancel Order</button>
+            <button type="button" class="btn btn-primary" onclick="save_upload_order(this);">Save changes</button>
+        `;
+    }else if(order_st == '3'){
+        $html_button = `
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-danger" onclick="cancel_order(this);">Cancel Order</button>
+        `;
+    }
     html = `
     <!-- Modal -->
     <div class="modal fade " id="modal_view_success_order" tabindex="-1" aria-labelledby="modal_view_success_orderLabel" aria-hidden="true">
@@ -322,9 +317,9 @@ function modal_view_success_order(data = {}) {
             <div class="container">
             
                 <div>
-                    <label for="basic-url" class="form-label">รายละเอียดการจอง</label>
-                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขจอง : ${order_no}</label></div>
-                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >จองวันที่  : ${date_start} ถึง ${date_end}</label></div>
+                    <label for="basic-url" class="form-label">รายละเอียดการเช่า</label>
+                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขเช่า : ${order_no}</label></div>
+                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เช่าวันที่  : ${date_start} ถึง ${date_end}</label></div>
                         <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ยี่ห้อ : ${brand}</label></div>
                         <div style="margin-left:10px;"><label for="basic-url" class="form-label" >รุ่น : ${model}</label></div>
                         <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ราคา : ${price}</label></div>
@@ -341,13 +336,9 @@ function modal_view_success_order(data = {}) {
             </div>
         </div>
             <div class="modal-footer">                
-                <button type="button" class="btn btn-secondary" onclick="printDiv('print-order-detail')" data-bs-dismiss="modal">Print</button>
-
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" onclick="cancel_order(this);">Cancel Order</button>
-                <button type="button" class="btn btn-primary" onclick="save_upload_order(this);">Save changes</button>
+                ${$html_button}
             </div>
-            </div>
+            
         </div>
     </div>
     `;
@@ -373,17 +364,20 @@ function html_prepare_print_order(data ={}) {
     let d_name = data['driver_name'];
     let d_lname = data['driver_lname'];
     let d_phone = data['driver_phone'];
-
+    let seat = data['seat'];
+console.log(data);
     let html = `
-        <div>ขอบคุณลูกค้า ที่จองรถกับเรา</div>
-        <div>หมายเลขการจอง ${order_no}</div>
-        <div>จองรถตั้งแต่วันที่ ${date_start}</div>
-        <div>สิ้นสุดวันที่ ${date_end}</div>
-        <div>รถยี่ห้อ ${brand}</div>
-        <div>รุ่น ${model}</div>
-        <div>จำนวนเงิน  ${price}</div>
-        <div>พนักงานขัยรถของคุณ ชื่อ  ${d_name} ${d_lname}</div>
-        <div>โทร.  ${d_phone}</div>
+
+        <br> <div class="text-center"><h1>ขอบคุณลูกค้า ที่เช่ารถกับเรา</h1></div>
+        <br> <div>หมายเลขการเช่า ${order_no}</div>
+        <br><div>เช่ารถตั้งแต่วันที่ ${date_start}</div>
+        <br><div>สิ้นสุดวันที่ ${date_end}</div>
+        <br><div>รถยี่ห้อ ${brand}</div>
+        <br><div>รุ่น ${model}</div>
+        <br><div>จำนวนที่นั่ง  ${seat}</div>
+        <br><div>จำนวนเงิน  ${price}</div>
+        <br><div>พนักงานขับรถของคุณ ชื่อ  ${d_name} ${d_lname}</div>
+        <br><div>โทร.  ${d_phone}</div>
 
     `;
     $('#print-order-detail').html(html);
@@ -415,3 +409,5 @@ async function printDiv(divName){
       document.body.innerHTML = originalContents;
 
 }
+
+

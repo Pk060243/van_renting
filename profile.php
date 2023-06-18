@@ -30,9 +30,6 @@ session_start();
     <!-- RTL Css -->
     <link rel="stylesheet" href="assets/css/rtl.min.css" />
 
-    <!-- font awsome Css -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
 
 </head>
 
@@ -58,7 +55,7 @@ session_start();
                         <div class="col-md-12">
                             <div class="flex-wrap d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h1>Order</h1>
+                                    <h1>Profile</h1>
 
                                 </div>
 
@@ -79,23 +76,33 @@ session_start();
         </div>
         <div class="conatiner-fluid content-inner mt-n5 py-0">
             <!-- MAIN BODY START -->
-
-           
-            <div class="container mt-5">
-                <div class="row row-cols-1 row-cols-md-2 order-list">
-                   
+            
+            <div class="mt-5">
+                <div class="row  row-cols-1  g-4 profile_detail">
+                    
 
                 </div>
-            </div>
+            </div>   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
             <!-- MAIN BODY END -->
         </div>
 
-
-
-        <div id="print-order-detail" style="display:none;">
-
-        </div>
         <!-- Footer Section Start -->
         <?php include 'include/footermain.php'; ?>
         <!-- Footer Section End -->
@@ -132,13 +139,11 @@ session_start();
     <!-- AOS Animation Plugin-->
 
     <!-- App Script -->
-
     <script src="assets/js/hope-ui.js" defer></script>
+
     <script src="assets/lib/resize_image/jquery.resizeImg.js"></script>
-    <script src="js/order/order.js" defer></script>
 
-
-
+    <script src="js/profile.js"></script>
 
 </body>
 

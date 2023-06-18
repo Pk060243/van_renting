@@ -38,7 +38,7 @@ session_start();
                         <div class="col-md-12">
                             <div class="flex-wrap d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h1>จัดการผู้ใช้งาน (Admin)</h1>
+                                    <h1>Hello Devs!</h1>
 
                                 </div>
                                
@@ -61,10 +61,9 @@ session_start();
             <!-- MAIN BODY START -->
             <div class="mt-5">
                 <div class="card p-3">
-                    <h2>ผู้ดูแลระบบ</h2>
                     <div class="col-md-12 d-flex flex-row-reverse mb-2">
                         <div class="">
-                            <button class="btn btn-success" onclick="modal_add_user();"type="button">Add</button>
+                            <button class="btn btn-success" onclick="modal_add_vantype();"type="button">Add</button>
                         </div>
                     </div>
                     <div class="table-responsive border-bottom my-3">
@@ -72,9 +71,8 @@ session_start();
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>User ID</th>
-                                    <th>รหัสผ่าน</th>
-                                    <th>ชื่อผู้ใช้งาน</th>
+                                    <th>รหัสประเภท</th>
+                                    <th>ชื่อประเภท</th>
                                     <th>Menu</th>
                                 </tr>
                             </thead>
@@ -86,30 +84,6 @@ session_start();
                     </div>
                 </div>
 
-
-                <div class="card p-3">
-                    <h2>ลูกค้า</h2>
-                    <div class="col-md-12 d-flex flex-row-reverse mb-2">
-                        
-                    </div>
-                    <div class="table-responsive border-bottom my-3">
-                        <table id="table_customer" class="table table-striped">
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>ชื่อ - นามสกุล</th>
-                                    <th>เบอร์โทร</th>
-                                    <th>อีเมล</th>
-                                    <th>Menu</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                            </tbody>
-
-                        </table>
-                    </div>
-                </div>
             </div>
 
 
@@ -130,4 +104,5 @@ session_start();
 </body>
 
 </html>
-<script src="js/admin_user/user_main.js"></script>
+<script src="js/admin_vantype/vantype_main.js"></script>
+

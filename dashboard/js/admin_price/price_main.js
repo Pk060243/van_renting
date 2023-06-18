@@ -19,7 +19,21 @@ function ajax_get_price_table(data = {}) {
     });
   });
 }
+function ajax_get_van_type(data = {}) {
+  return new Promise(function (resolve, reject) {
+    $.ajax({
+      type: "post",
+      url: "php/admin_van/get_select_van_type.php",
+      data: data,
+      dataType: "json",
+      success: function (response) {
+        resolve(response);
+      },
+    });
+  });
+}
 function html_admin_main_price(data) {
+  
   let html = "";
   if(data['st'] == '1'){
     $.each(data['data'], function (i, v) {
@@ -35,7 +49,7 @@ function html_admin_main_price(data) {
           <tr>
               <td align="center">${i + 1}</td>
               <td align="center">${v["price"]}</td>
-              <td align="center">${v["type_van"]}</td>
+              <td align="center">${v["type_name"]}</td>
               <td align="center">${html_btn}</td>
           </tr>
           `;
@@ -80,8 +94,15 @@ function ajax_price_delete(data = {}) {
 
 
 // save add price
-function modal_add_price() {
+async function modal_add_price() {
   $('#modal_add_price').remove();
+  let type_select_data = await ajax_get_van_type();
+  let html_selct_type_option = '';
+  $.each(type_select_data, function (i, v) { 
+    html_selct_type_option += `
+    <option value="${v['ID']}">${v['type_name']}</option>
+    `;
+  });
   let html = "";
   html = `
         <!-- Modal -->
@@ -101,7 +122,10 @@ function modal_add_price() {
                       </div>
                       <label for="basic-url" class="form-label">ประเภทรถตู้</label>
                       <div class="input-group mb-3">
-                          <input type="text" class="form-control inp_type" id="" aria-describedby="basic-addon3">
+                        <select class="form-select inp_type">
+                          ${html_selct_type_option}
+                        </select>
+                          
                       </div>
                     </div>
                 </div>
@@ -165,8 +189,18 @@ function ajax_get_edit_price(data={}){
       });
   });
 }
-function modal_edit_price(data = {}) {
+async function modal_edit_price(data = {}) {
   $('#modal_edit_price').remove();
+  let type_select_data = await ajax_get_van_type();
+  let html_selct_type_option = '';
+  $.each(type_select_data, function (i, v) { 
+    html_selct_type_option += `
+    <option value="${v['ID']}">${v['type_name']}</option>
+    `;
+  });
+
+
+
   let ID = (!!data['ID'])? data['ID'] : '' ;
   let price = (!!data['price'])? data['price'] : '' ;
   let type = (!!data['type_van'])? data['type_van'] : '' ;
@@ -187,8 +221,11 @@ html = `
                         <input type="text" class="form-control inp_edit_price" id="" aria-describedby="basic-addon3" value="${price}">
                     </div>
                     <label for="basic-url" class="form-label">ประเภทรถตู้</label>
+                    
                     <div class="input-group mb-3">
-                        <input type="text" class="form-control inp_edit_type" id="" aria-describedby="basic-addon3" value="${type}">
+                        <select class="form-select inp_edit_type" readonly> 
+                          ${html_selct_type_option}
+                        </select>
                     </div>
                   </div>
               </div>
@@ -202,6 +239,7 @@ html = `
   `;
   $('body').append(html);
   $('#modal_edit_price').modal('show');
+  $('.inp_edit_type').val(type);
 }
 async function save_edit_price(e=null) {
   let ID = $(e).closest('#modal_edit_price').attr('data-id');

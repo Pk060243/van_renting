@@ -7,11 +7,11 @@ $sql = "
         order_header.st as 'order_st'
     FROM
         `order_header`
-    JOIN van on van.ID = order_header.van_id
+    LEFT JOIN van on van.ID = order_header.van_id
     LEFT JOIN driver on driver.ID = order_header.driver_id
-    JOIN userid on userid.ID = order_header.customer_id
-    JOIN customer_detail on customer_detail.user_id = userid.ID
-    JOIN van_type on van_type.ID = van.type
+    LEFT JOIN userid on userid.ID = order_header.customer_id
+    LEFT JOIN customer_detail on customer_detail.user_id = userid.ID
+    LEFT JOIN van_type on van_type.ID = van.type
     WHERE
     1
 ";

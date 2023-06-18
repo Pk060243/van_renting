@@ -63,12 +63,16 @@
                         </div>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                        <li>
-                            <a class="dropdown-item" href="dashboard/app/user-profile.html">Profile</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="dashboard/app/user-privacy-setting.html">Privacy Setting</a>
-                        </li>
+                        <?php
+                        if(sizeof($_SESSION) != 0){
+                            echo '
+                                <li>
+                                    <a class="dropdown-item" href="profile.php">Profile</a>
+                                </li>';
+                        }
+                        ?>
+                        
+                        
                         <li>
                             <hr class="dropdown-divider" />
                         </li>

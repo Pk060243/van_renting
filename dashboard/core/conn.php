@@ -8,3 +8,7 @@ $db_name = "van_renting";
 $con=mysqli_connect($host,$user,$pass ,$db_name);
 
 ?>
+
+
+
+

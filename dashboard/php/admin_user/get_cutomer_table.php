@@ -2,15 +2,7 @@
 include '../../core/conn.php';
 
 $sql = "
-    SELECT
-        price.`ID`,
-        price.`price_name`,
-        price.`price`,
-        price.`type_van`,
-        van_type.type_name
-    FROM
-        `price`
-    LEFT JOIN van_type ON price.type_van = van_type.ID ORDER BY type_van;
+    SELECT * from customer_detail WHERE 1;
 ";
 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
 if(mysqli_num_rows($result) >= 1){

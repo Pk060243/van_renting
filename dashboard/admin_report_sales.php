@@ -35,7 +35,7 @@ session_start();
                         <div class="col-md-12">
                             <div class="flex-wrap d-flex justify-content-between align-items-center">
                                 <div>
-                                    <h1>รายงาน ยอดการจอง</h1>
+                                    <h1>รายงาน ยอดการเช่า</h1>
 
                                 </div>
                                 <div>
@@ -75,7 +75,7 @@ session_start();
                                 <legend>สถานะ</legend>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="chk_success" name="chk_st[]">
-                                    <label class="form-check-label" for="chk_success">จองสำเร็จ</label>
+                                    <label class="form-check-label" for="chk_success">เช่าสำเร็จ</label>
                                 </div>
                                 <div class="mb-3 form-check">
                                     <input type="checkbox" class="form-check-input" id="chk_reject" name="chk_st[]">
@@ -87,7 +87,7 @@ session_start();
                         <div class="col-md-6">
                             <fieldset class="mb-3">
                                 <legend>เลือกช่วงเวลา</legend>
-                                <label for="basic-url" class="form-label">วันที่จอง</label>
+                                <label for="basic-url" class="form-label">วันที่เช่า</label>
                                 <div class="form-group">
                                     <input type="text" class="form-control date_flatpicker" placeholder="Date Picker">
                                 </div>
@@ -103,9 +103,11 @@ session_start();
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>หมายเลขการจอง</th>
-                                    <th>รถที่จอง</th>
+                                    <th>หมายเลขการเช่า</th>
+                                    <th>รถที่เช่า</th>
                                     <th>ชื่อลูกค้า</th>
+                                    <th>วันที่เช่า</th>
+                                    <th>ราคา</th>
                                     <th>สถานะ</th>
                                 </tr>
                             </thead>
@@ -131,13 +133,16 @@ session_start();
                 <thead>
                     <tr>
                         <th>#</th>
-                        <th>หมายเลขการจอง</th>
-                        <th>รถที่จอง</th>
+                        <th>หมายเลขการเช่า</th>
+                        <th>รถที่เช่า</th>
                         <th>ชื่อลูกค้า</th>
+                        <th>วันที่เช่า</th>
+                        <th>ราคา</th>
                         <th>สถานะ</th>
                     </tr>
                 </thead>
                 <tbody>
+                    
                 </tbody>
             </table>
         </div>
@@ -163,15 +168,5 @@ session_start();
 </html>
 
 <script>
-    function printDiv(divName) {
-        var printContents = document.getElementById(divName).innerHTML;
-        var originalContents = document.body.innerHTML;
-
-        document.body.innerHTML = printContents;
-
-        window.print();
-
-        document.body.innerHTML = originalContents;
-
-    }
+    
 </script>
