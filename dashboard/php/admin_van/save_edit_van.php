@@ -9,6 +9,10 @@ $color = $_POST['color'];
 $seat = $_POST['seat'];
 $type = $_POST['type'];
 $pic = $_POST['pic'];
+$picf = $_POST['picf'];
+$picl = $_POST['picl'];
+$picr = $_POST['picr'];
+$picb = $_POST['picb'];
 
 
 $sql = "
@@ -21,7 +25,11 @@ $sql = "
     `seat` = '$seat',
     `plate` = '$plate',
     `type` = '$type',
-    `pic` = '$pic'
+    `pic` = '$pic',
+    `picf` = '$picf',
+    `picl` = '$picl',
+    `picr` = '$picr',
+    `picb` = '$picb'
   WHERE
     `ID` = '$ID'
 

@@ -332,6 +332,9 @@ async function view_approved_order(e = null) {
     let res = await ajax_get_approve_order_by_ID(data);
     modal_view_approve_order(res['data']);
 
+    let res2 = await ajax_get_view_order(data);
+    html_prepare_print_order(res2);
+
 }
 function modal_view_approve_order(data = {}){
      
@@ -383,6 +386,7 @@ function modal_view_approve_order(data = {}){
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" onclick="printDiv('print-order-detail')" data-bs-dismiss="modal">Print</button>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
 
                 </div>
@@ -392,4 +396,84 @@ function modal_view_approve_order(data = {}){
     `;
     $('body').append(html);
     $('#modal_view_approve_order').modal('show');
+}
+function ajax_get_view_order(data) {
+    return new Promise(function (resolve, reject) {
+        $.ajax({
+            type: "post",
+            url: "../php/order/get_view_order.php",
+            data: data,
+            dataType: "json",
+            success: function (response) {
+                resolve(response);
+            }
+        });
+    });
+}
+function html_prepare_print_order(data ={}) {
+    console.log(data);
+    let order_no = data['order_number'];
+    let date_start = data['date_start'];
+    let date_end = data['date_end'];
+    let plate = data['plate'];
+    let model = data['model'];
+    let brand = data['brand'];
+    let price = data['price'];
+    let d_name = data['driver_name'];
+    let d_lname = data['driver_lname'];
+    let d_phone = data['driver_phone'];
+    let seat = data['seat'];
+    let html = `
+        <br> <div class="text-center"><h4>ใบเสร็จชำระเงิน</h4></div>
+        <div class="text-center"><h4>บริษัท Van_renting</h4></div>
+        <div class="text-center"><h4>1234/43 ถนนบางนา-ตราด</h4></div>
+        <div class="text-center"><h4>แขวงบางนา เขตบางนา กรุงเทพฯ</h4></div>
+        <br> <div>หมายเลขการเช่า ${order_no}</div>
+        <div>เช่ารถตั้งแต่วันที่ ${date_start}</div>
+        <div>สิ้นสุดวันที่ ${date_end}</div>
+
+
+
+        <div style="margin:35px auto;width:90%;height:350px; border:2px solid;">
+            <div style="display:inline-flex; width:100%;" >
+                <div style="border:2px solid;width:25%; text-align:center;">ยี่ห้อ</div>
+                <div style="border:2px solid;width:25%; text-align:center;">รุ่น</div>
+                <div style="border:2px solid;width:25%; text-align:center;">จำนวนที่นั่ง</div>
+                <div style="border:2px solid;width:25%; text-align:center;">จำนวนเงิน</div>
+                
+            </div>
+
+            <div style="margin-top:20px; display:inline-flex; width:100%;" >
+                <div style="width:25%; text-align:center;">${brand}</div>
+                <div style="width:25%; text-align:center;">${model}</div>
+                <div style="width:25%; text-align:center;">${seat}</div>
+                <div style="width:25%; text-align:center;">${price}</div>
+                
+            </div>
+        </div>
+
+        <br> <div class="text-end"><h4>จำนวณเงิน : ${price} บาท</h4></div>
+        <br> <div class="text-end"><h4>ขอบพระคุณ ที่ไว้ใจ และใช้บริการ</h4></div>
+
+        
+
+
+
+       
+
+    `;
+    $('#print-order-detail').html(html);
+}
+async function printDiv(divName){
+    await new Promise(resolve => {
+        $('#modal_view_success_order').modal('hide');
+        setTimeout(resolve, 500);
+      });
+    
+      var printContents = document.getElementById(divName).innerHTML;
+      var originalContents = document.body.innerHTML;
+      document.body.innerHTML = printContents;
+      window.print();
+      document.body.innerHTML = originalContents;
+
 }

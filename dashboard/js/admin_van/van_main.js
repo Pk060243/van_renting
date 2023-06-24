@@ -117,7 +117,14 @@ async function modal_add_van() {
     
                           <label for="basic-url" class="form-label">ยี่ห้อ</label>
                           <div class="input-group mb-3">
-                              <input type="text" class="form-control inp_brand" id="" aria-describedby="basic-addon3">
+                              <select class="form-control inp_brand">
+                                <option value="Hyundai">Hyundai</option>
+                                <option value="Toyota">Toyota</option>
+                                <option value="Lexus">Lexus</option>
+                                <option value="Benz">Benz</option>
+                                <option value="Volkswagen">Volkswagen</option>
+
+                              </select>
                           </div>
     
                           <label for="basic-url" class="form-label">รุ่น</label>
@@ -127,12 +134,17 @@ async function modal_add_van() {
                           
                           <label for="basic-url" class="form-label">สี</label>
                           <div class="input-group mb-3">
-                              <input type="text" class="form-control inp_color" id="" aria-describedby="basic-addon3">
+                              <select class="form-control inp_color">
+                                <option value="ขาว">ขาว</option>
+                                <option value="ดำ">ดำ</option>
+                                <option value="เทา">เทา</option>
+                                <option value="น้ำตาล">น้ำตาล</option>
+                              </select>
                           </div>
                           
                           <label for="basic-url" class="form-label">จำนวนที่นั่ง</label>
                           <div class="input-group mb-3">
-                              <input type="text" class="form-control inp_seat" id="" aria-describedby="basic-addon3">
+                              <input type="number" class="form-control inp_seat" id="" aria-describedby="basic-addon3">
                           </div>
     
                           <label for="basic-url" class="form-label">ประเภท</label>
@@ -143,14 +155,46 @@ async function modal_add_van() {
                           </div>
                         </div>
                         <div class="col">
-                          <label for="basic-url" class="form-label">รูป</label>
+                          <label for="basic-url" class="form-label">รูปหลัก</label>
                           <div class="input-group mb-3">
                               <input type="file" class="form-control inp_file" id="" aria-describedby="basic-addon3">
                           </div>
                           <div style="width:100%">
                             <img id="blah" src="#" style="width: 100%;" />
                           </div>
+                          <label for="basic-url" class="form-label">รูปด้านหน้า</label>
+                          <div class="input-group mb-3">
+                              <input type="file" class="form-control inp_filef" id="" aria-describedby="basic-addon3">
+                          </div>
+                          <div class="test" style="width:100%">
+                            <img id="blahf" src="" style="width: 100%;" />
+                          </div>
+                          <label for="basic-url" class="form-label">รูปด้านซ้าย</label>
+                          <div class="input-group mb-3">
+                              <input type="file" class="form-control inp_filel" id="" aria-describedby="basic-addon3">
+                          </div>
+                          <div class="test" style="width:100%">
+                            <img id="blahl" src="" style="width: 100%;" />
+                          </div>
+                          <label for="basic-url" class="form-label">รูปด้านขวา</label>
+                          <div class="input-group mb-3">
+                              <input type="file" class="form-control inp_filer" id="" aria-describedby="basic-addon3">
+                          </div>
+                          <div class="test" style="width:100%">
+                            <img id="blahr" src="" style="width: 100%;" />
+                          </div>
+                          <label for="basic-url" class="form-label">รูปด้านหลัง</label>
+                          <div class="input-group mb-3">
+                              <input type="file" class="form-control inp_fileb" id="" aria-describedby="basic-addon3">
+                          </div>
+                          <div class="test" style="width:100%">
+                            <img id="blahb" src="" style="width: 100%;" />
+                          </div>
                         </div>
+
+
+                        
+                       
                       </div>
 
 
@@ -181,6 +225,19 @@ async function modal_add_van() {
   $(".inp_file").change(function(){
     readURL(this);
   });
+  $(".inp_filef").change(function(){
+    readURLf(this);
+  });
+  $(".inp_filel").change(function(){
+    readURLl(this);
+  });
+  $(".inp_filer").change(function(){
+    readURLr(this);
+  });
+  $(".inp_fileb").change(function(){
+    readURLb(this);
+  });
+
 
 }
 async function save_van() {
@@ -191,6 +248,10 @@ async function save_van() {
   let seat = $(".inp_seat").val();
   let type = $(".inp_type").val();
   let file = $("#blah").attr('src');
+  let picf = $("#blahf").attr('src');
+  let picl = $("#blahl").attr('src');
+  let picr = $("#blahr").attr('src');
+  let picb = $("#blahb").attr('src');
 
   let data = {
     plate: plate,
@@ -199,7 +260,11 @@ async function save_van() {
     color: color,
     seat: seat,
     type: type,
-    file: file
+    file: file,
+    picf : picf,
+    picl : picl,
+    picr : picr,
+    picb : picb,
   };
   let res = await ajax_save_van(data);
   if (res["st"] == "1") {
@@ -260,6 +325,11 @@ async function modal_edit_van(data = {}) {
   let seat = !!data["seat"] ? data["seat"] : "";
   let type = !!data["type"] ? data["type"] : "";
   let pic = !!data["pic"] ? data["pic"] : "";
+  let picf = !!data["picf"] ? data["picf"] : "";
+  let picl = !!data["picl"] ? data["picl"] : "";
+  let picr = !!data["picr"] ? data["picr"] : "";
+  let picb = !!data["picb"] ? data["picb"] : "";
+
   let html = "";
   html = `
       <!-- Modal -->
@@ -281,7 +351,14 @@ async function modal_edit_van(data = {}) {
     
                         <label for="basic-url" class="form-label">ยี่ห้อ</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control inp_edit_brand" id="" aria-describedby="basic-addon3" value="${brand}">
+                            <select class="form-control inp_edit_brand">
+                                <option value="Hyundai">Hyundai</option>
+                                <option value="Toyota">Toyota</option>
+                                <option value="Lexus">Lexus</option>
+                                <option value="Benz">Benz</option>
+                                <option value="Volkswagen">Volkswagen</option>
+
+                              </select>
                         </div>
     
                         <label for="basic-url" class="form-label">รุ่น</label>
@@ -291,12 +368,17 @@ async function modal_edit_van(data = {}) {
                         
                         <label for="basic-url" class="form-label">สี</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control inp_edit_color" id="" aria-describedby="basic-addon3"value="${color}">
+                          <select class="form-control inp_edit_color">
+                            <option value="ขาว">ขาว</option>
+                            <option value="ดำ">ดำ</option>
+                            <option value="เทา">เทา</option>
+                            <option value="น้ำตาล">น้ำตาล</option>
+                          </select>
                         </div>
                         
                         <label for="basic-url" class="form-label">จำนวนที่นั่ง</label>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control inp_edit_seat" id="" aria-describedby="basic-addon3" value="${seat}">
+                            <input type="number" class="form-control inp_edit_seat" id="" aria-describedby="basic-addon3" value="${seat}">
                         </div>
     
                         <label for="basic-url" class="form-label">ประเภท</label>
@@ -307,12 +389,41 @@ async function modal_edit_van(data = {}) {
                         </div>
                       </div>
                       <div class="col">
-                        <label for="basic-url" class="form-label">รูป</label>
+                        <label for="basic-url" class="form-label">รูปหลัก</label>
                         <div class="input-group mb-3">
                             <input type="file" class="form-control inp_file" id="" aria-describedby="basic-addon3">
                         </div>
                         <div class="test" style="width:100%">
                           <img id="blah" src="${pic}" style="width: 100%;" />
+                        </div>
+
+                        <label for="basic-url" class="form-label">รูปด้านหน้า</label>
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control inp_filef" id="" aria-describedby="basic-addon3">
+                        </div>
+                        <div class="test" style="width:100%">
+                          <img id="blahf" src="${picf}" style="width: 100%;" />
+                        </div>
+                        <label for="basic-url" class="form-label">รูปด้านซ้าย</label>
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control inp_filel" id="" aria-describedby="basic-addon3">
+                        </div>
+                        <div class="test" style="width:100%">
+                          <img id="blahl" src="${picl}" style="width: 100%;" />
+                        </div>
+                        <label for="basic-url" class="form-label">รูปด้านขวา</label>
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control inp_filer" id="" aria-describedby="basic-addon3">
+                        </div>
+                        <div class="test" style="width:100%">
+                          <img id="blahr" src="${picr}" style="width: 100%;" />
+                        </div>
+                        <label for="basic-url" class="form-label">รูปด้านหลัง</label>
+                        <div class="input-group mb-3">
+                            <input type="file" class="form-control inp_fileb" id="" aria-describedby="basic-addon3">
+                        </div>
+                        <div class="test" style="width:100%">
+                          <img id="blahb" src="${picb}" style="width: 100%;" />
                         </div>
                       </div>
                     </div>
@@ -329,12 +440,26 @@ async function modal_edit_van(data = {}) {
   `;
   $("body").append(html);
   $("#modal_edit_van").modal("show");
-  $(".inp_file").resizeImg({
+  $('.inp_edit_color').val(color);
+  $('.inp_edit_brand').val(brand);
+$(".inp_file").resizeImg({
     mode: 1,
     val: 800, // 800px
   })
   $(".inp_file").change(function(){
     readURL(this);
+  });
+  $(".inp_filef").change(function(){
+    readURLf(this);
+  });
+  $(".inp_filel").change(function(){
+    readURLl(this);
+  });
+  $(".inp_filer").change(function(){
+    readURLr(this);
+  });
+  $(".inp_fileb").change(function(){
+    readURLb(this);
   });
 
   $('.inp_edit_type').val(type)
@@ -349,6 +474,10 @@ async function save_edit_van(e = null) {
   let seat = $(".inp_edit_seat").val();
   let type = $(".inp_edit_type").val();
   let pic = $("#blah").attr('src');
+  let picf = $("#blahf").attr('src');
+  let picl = $("#blahl").attr('src');
+  let picr = $("#blahr").attr('src');
+  let picb = $("#blahb").attr('src');
 
   let data = {
     ID: ID,
@@ -359,6 +488,11 @@ async function save_edit_van(e = null) {
     seat: seat,
     type: type,
     pic : pic,
+    picf : picf,
+    picl : picl,
+    picr : picr,
+    picb : picb,
+
   };
   let res = await ajax_save_edit_van(data);
   if (res["st"] == "1") {
@@ -387,11 +521,46 @@ function ajax_save_edit_van(data = {}) {
 function readURL(input) {
   if (input.files && input.files[0]) {
       var reader = new FileReader();
-
       reader.onload = function (e) {
           $('#blah').attr('src', e.target.result);
       }
+      reader.readAsDataURL(input.files[0]);
+  }
+}
 
+function readURLf(input) {
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          $('#blahf').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+  }
+}
+function readURLl(input) {
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          $('#blahl').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+  }
+}
+function readURLr(input) {
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          $('#blahr').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(input.files[0]);
+  }
+}
+function readURLb(input) {
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          $('#blahb').attr('src', e.target.result);
+      }
       reader.readAsDataURL(input.files[0]);
   }
 }

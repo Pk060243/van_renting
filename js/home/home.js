@@ -93,6 +93,10 @@ function modal_order_detail(data = {}) {
     plate = v["plate"];
     type = v["type"];
     pic = v["pic"];
+    picf = v["picf"];
+    picl = v["picl"];
+    picr = v["picr"];
+    picb = v["picb"];
     price_id = v["price_id"];
     price_name = v["price_name"];
     price = v["price"];
@@ -148,6 +152,18 @@ function modal_order_detail(data = {}) {
                                     <div class="test" style="width:100%">
                                         <img id="blah" src="${pic}" style="width: 100%;" />
                                     </div>
+                                    <div class="test" style="width:100%">
+                                        <img id="blah" src="${picf}" style="width: 100%;" />
+                                    </div>
+                                    <div class="test" style="width:100%">
+                                        <img id="blah" src="${picl}" style="width: 100%;" />
+                                    </div>
+                                    <div class="test" style="width:100%">
+                                        <img id="blah" src="${picr}" style="width: 100%;" />
+                                    </div>
+                                    <div class="test" style="width:100%">
+                                        <img id="blah" src="${picb}" style="width: 100%;" />
+                                    </div>
 
                                     <label for="basic-url" class="form-label">วันที่เช่ารถ</label>
                                     <div class="form-group">
@@ -155,7 +171,7 @@ function modal_order_detail(data = {}) {
                                     </div>
 
                                     <h3>ราคาวันละ : ${price}</h3>
-                                    
+                                    <h4 style="color:red;">ค่าประกัน : ${'1,000'}</h4>
                                     <div>
                                         <label for="basic-url" class="form-label">ประเภทการชำระเงิน</label>
                                     </div>

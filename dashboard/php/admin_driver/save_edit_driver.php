@@ -2,24 +2,24 @@
 include '../../core/conn.php';
 
 $ID = $_POST['ID'];
-$plate = $_POST['plate'];
-$brand = $_POST['brand'];
-$model = $_POST['model'];
-$color = $_POST['color'];
-$seat = $_POST['seat'];
-$type = $_POST['type'];
+
+$fname = $_POST['fname'];
+$lname = $_POST['lname'];
+$phone = $_POST['phone'];
+$gender = $_POST['gender'];
+$file = $_POST['file'];
 
 
 $sql = "
   UPDATE
-    `van`
+    `driver`
   SET
-    `brand` = '$brand',
-    `model` = '$model',
-    `color` = '$color',
-    `seat` = '$seat',
-    `plate` = '$plate',
-    `type` = '$type'
+    `fname`  = '$fname',
+    `lname`  = '$lname',
+    `phone`  = '$phone',
+    `gender` = '$gender',
+    `pic`  = '$file'
+    
   WHERE
     `ID` = '$ID'
 

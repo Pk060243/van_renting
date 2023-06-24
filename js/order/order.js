@@ -36,11 +36,18 @@ async function modal_upload_pic(e = null) {
     let model = res['model'];
     let brand = res['brand'];
     let price = res['price'];
+    
+    let start = new Date(date_start);
+    let end = new Date(date_end);
+    var diff = end - start;
+
+    var diffInDays = diff / (1000 * 60 * 60 * 24);
+    
     let html_deposit
     if( res['payment_type'] == '1'){
         html_deposit = '';
     }else if( res['payment_type'] == '2'){
-        html_deposit = `<div style="margin-left:10px;"><label for="basic-url" class="form-label" >ค่ามัดจำ : ${price * 0.2}</label></div>`;
+        html_deposit = `<div style="margin-left:10px;"><h5>ชำระค่ามัดจำ: ${price * 0.2}</h5></div>`;
     }
 
     $('#modal_upload_payment').remove();
@@ -60,10 +67,14 @@ async function modal_upload_pic(e = null) {
                     <div class ="col-md-6">
                         <label for="basic-url" class="form-label">รายละเอียดการเช่า</label>
                             <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขเช่า : ${order_no}</label></div>
-                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เช่าวันที่  : ${date_start} ถึง ${date_end}</label></div>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เช่าวันที่  : ${date_start} ถึง ${date_end} (${diffInDays+1} วัน)</label></div>
                             <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ยี่ห้อ : ${brand}</label></div>
                             <div style="margin-left:10px;"><label for="basic-url" class="form-label" >รุ่น : ${model}</label></div>
                             <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ราคา : ${price}</label></div>
+                            <div style="margin-left:10px; "><label for="basic-url" class="form-label" >ค่าประกัน : ${'1000'}</label> <nts style="color:red;">*จะได้คืนเมื่อสิ้นสุดการจอง</nts></div>
+
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" ><h5>ทั้งสิ้น : ${parseFloat(price) + parseFloat(1000)}</h5></label></div>
+
                             ${html_deposit}
                     </div>
                     <div class ="col-md-6">
@@ -247,7 +258,6 @@ async function modal_view_order(e = null) {
     let data = {'ID' : ID}
     let res = await ajax_get_view_order(data);
     modal_view_success_order(res);
-
     html_prepare_print_order(res);// สร้างข้อมูลสำหรับปริ้น
 }
 
@@ -280,6 +290,7 @@ function modal_view_success_order(data = {}) {
     let d_name = data['driver_name'];
     let d_lname = data['driver_lname'];
     let d_phone = data['driver_phone'];
+    let d_pic = data['driver_pic'];
 
     $html_button = '';
     if(order_st == '0'){
@@ -315,17 +326,23 @@ function modal_view_success_order(data = {}) {
             </div>
             <div class="modal-body">
             <div class="container">
-            
-                <div>
-                    <label for="basic-url" class="form-label">รายละเอียดการเช่า</label>
-                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขเช่า : ${order_no}</label></div>
-                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เช่าวันที่  : ${date_start} ถึง ${date_end}</label></div>
-                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ยี่ห้อ : ${brand}</label></div>
-                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >รุ่น : ${model}</label></div>
-                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ราคา : ${price}</label></div>
-                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ชื่อคนขับ : ${d_name} ${d_lname}</label></div>
-                        <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ติดต่อคนขับ : ${d_phone}</label></div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="basic-url" class="form-label">รายละเอียดการเช่า</label>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขเช่า : ${order_no}</label></div>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เช่าวันที่  : ${date_start} ถึง ${date_end}</label></div>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ยี่ห้อ : ${brand}</label></div>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >รุ่น : ${model}</label></div>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ราคา : ${price}</label></div>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ชื่อคนขับ : ${d_name} ${d_lname}</label></div>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ติดต่อคนขับ : ${d_phone}</label></div>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="basic-url" class="form-label">รูปพนักงานขับรถ</label>
+                        <img id="blah" src="${d_pic}" style="width: 100%;" />
+                    </div>
                 </div>
+               
                 
                 
                 <label for="basic-url" class="form-label">หลักฐานการชำระเงิน</label>
@@ -365,25 +382,49 @@ function html_prepare_print_order(data ={}) {
     let d_lname = data['driver_lname'];
     let d_phone = data['driver_phone'];
     let seat = data['seat'];
-console.log(data);
     let html = `
-
-        <br> <div class="text-center"><h1>ขอบคุณลูกค้า ที่เช่ารถกับเรา</h1></div>
+        <br> <div class="text-center"><h4>ใบยืนยัน การจอง</h4></div>
+        <div class="text-center"><h4>บริษัท Van_renting</h4></div>
+        <div class="text-center"><h4>1234/43 ถนนบางนา-ตราด</h4></div>
+        <div class="text-center"><h4>แขวงบางนา เขตบางนา กรุงเทพฯ</h4></div>
         <br> <div>หมายเลขการเช่า ${order_no}</div>
-        <br><div>เช่ารถตั้งแต่วันที่ ${date_start}</div>
-        <br><div>สิ้นสุดวันที่ ${date_end}</div>
-        <br><div>รถยี่ห้อ ${brand}</div>
-        <br><div>รุ่น ${model}</div>
-        <br><div>จำนวนที่นั่ง  ${seat}</div>
-        <br><div>จำนวนเงิน  ${price}</div>
-        <br><div>พนักงานขับรถของคุณ ชื่อ  ${d_name} ${d_lname}</div>
-        <br><div>โทร.  ${d_phone}</div>
+        <div>เช่ารถตั้งแต่วันที่ ${date_start}</div>
+        <div>สิ้นสุดวันที่ ${date_end}</div>
+
+
+
+        <div style="margin-top:35px;width:100%;height:350px; border:2px solid;">
+            <div style="display:inline-flex; width:100%;" >
+                <div style="border:2px solid;width:20%; text-align:center;">ยี่ห้อ</div>
+                <div style="border:2px solid;width:20%; text-align:center;">รุ่น</div>
+                <div style="border:2px solid;width:10%; text-align:center;">จำนวนที่นั่ง</div>
+                <div style="border:2px solid;width:10%; text-align:center;">จำนวนเงิน</div>
+                <div style="border:2px solid;width:20%; text-align:center;">พนักงานขับรถ</div>  
+                <div style="border:2px solid;width:20%; text-align:center;">ติดต่อ</div>  
+            </div>
+
+            <div style="margin-top:20px; display:inline-flex; width:100%;" >
+                <div style="width:20%; text-align:center;">${brand}</div>
+                <div style="width:20%; text-align:center;">${model}</div>
+                <div style="width:10%; text-align:center;">${seat}</div>
+                <div style="width:10%; text-align:center;">${price}</div>
+                <div style="width:20%; text-align:center;">${d_name} ${d_lname}</div>  
+                <div style="width:20%; text-align:center;">${d_phone}</div>  
+            </div>
+        </div>
+
+        <br> <div class="text-center"><h4>โปรดแสดงใบจอง ให้เจ้าหน้าที่ในวันที่รับรถ</h4></div>
+        <br> <div class="text-center"><h4>ขอบพระคุณ ที่ไว้ใจ และใช้บริการ</h4></div>
+
+        
+
+
+
+       
 
     `;
     $('#print-order-detail').html(html);
 }
-
-
 
 function readURL(input) {
   if (input.files && input.files[0]) {

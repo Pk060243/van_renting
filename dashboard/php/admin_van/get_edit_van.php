@@ -2,7 +2,7 @@
 include '../../core/conn.php';
 
 $ID = $_POST['ID'];
-$sql = "
+ $sql = "
     SELECT * FROM `van` WHERE `ID` = '$ID';
 ";
 $result = mysqli_query($con, $sql) or die(mysqli_error($con));

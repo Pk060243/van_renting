@@ -7,7 +7,7 @@ $sql = "
 ";
 $result = mysqli_query($con, $sql) or die(mysqli_error($con));
 while ($row = $result->fetch_assoc()) {
-    $row['pic'] = 'data:image/png;base64,'.base64_encode($row['pic']);
+    // $row['pic'] = 'data:image/png;base64,'.base64_encode($row['pic']);
 
     $arr_data = $row;
 }

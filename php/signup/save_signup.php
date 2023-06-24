@@ -7,7 +7,7 @@
     $lname = $_POST['lname'];
     $email = $_POST['email'];
     $phone = $_POST['phone'];
-    $pic = $_POST['pic'];
+   
 
     $sql_user_id = "
     INSERT INTO `userid`(
@@ -42,7 +42,7 @@
         `Lname`,
         `phone`,
         `email`,
-        `id_card_pic`
+       
     )
     VALUES(
         '$last_id',
@@ -50,7 +50,7 @@
         '$lname',
         '$phone',
         '$email',
-        '$pic'
+        
     )
     ";
     if ($con->query($sql_customer_detail) === TRUE) {

@@ -9,11 +9,7 @@ async function convert_to_base64(element) {
    const file = element;
    return res = (await toBase64(file));
 }
-$('.inp-pic').change(async function (e) { 
-    e.preventDefault();
-    let pic = await convert_to_base64($('.inp-pic')[0].files[0]);
-    $('.image-ex').attr('src', pic);
-});
+
 const signup = {
    
     save_signup :async function () { 
@@ -24,7 +20,6 @@ const signup = {
         let email = $('.inp-email').val();
         let phone = $('.inp-phone').val();
         let birth = $('.inp-birth').val();
-        let pic = await convert_to_base64($('.inp-pic')[0].files[0]);
         
         
          data = {
@@ -35,7 +30,6 @@ const signup = {
             'email' :email,
             'phone' :phone,
             'birth' :birth,
-            'pic' : pic,
         };
         let res = await signup.ajax_save_signup(data);
     },  

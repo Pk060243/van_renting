@@ -290,9 +290,9 @@ async function save_edit_driver(e = null) {
 
   let fname = $(".inp_edit_fname").val();
   let lname = $(".inp_edit_lname").val();
-  let gender = $(".inp_edit_gender").val();
+  let gender = $(".sel_gender").val();
   let phone = $(".inp_edit_phone").val();
-
+  let file = $("#blah").attr('src');
 
   let data = {
     ID: ID,
@@ -300,7 +300,7 @@ async function save_edit_driver(e = null) {
     lname: lname,
     gender: gender,
     phone: phone,
-    
+    file:file,
   };
   let res = await ajax_save_edit_driver(data);
   if (res["st"] == "1") {

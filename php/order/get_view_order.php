@@ -20,7 +20,8 @@ $sql = "
         van.*,
         driver.fname as 'driver_name',
         driver.lname as 'driver_lname',
-        driver.phone as 'driver_phone'
+        driver.phone as 'driver_phone',
+        driver.pic as 'driver_pic'
 
     FROM
         `order_header`
