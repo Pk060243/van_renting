@@ -1,13 +1,56 @@
 $(document).ready(function () {
+  sel_van_date();
   get_van_talbe();
+  
 });
 
 
 
 
+async function sel_van_date() {  
+  let html = '';
+  html = `
+    <div class="col">
+      <div class="card">
+      
+          <div class="card-body">
+              เลือกวันที่ต้องการเช่า
+              <div class="row">
+                  <div class="form-group col-md-8"style=" display: inline-flex;">
+                    <input type="text" class="form-control date_flatpicker_sel " placeholder="Date Picker" style="width: 50%;">
+                    <button class="btn btn-success search_van_date" onclick="search_van();">ค้นหา</button>
+                  </div>
+              </div>
+             
+          </div>
+              
 
-async function get_van_talbe() {
-  let res = await ajax_get_van_table();
+          </div>
+          
+      </div>
+   </div>
+  `;
+  $(".check_car_st_date").append(html);
+  $(".date_flatpicker_sel").flatpickr({
+    dateFormat: "d/m/Y",
+    mode: "range",
+  });
+
+}
+
+function search_van(e=null) {  
+  let date_flatpicker_sel = $('.date_flatpicker_sel').val();
+  var dateRange = date_flatpicker_sel;
+  var dates = dateRange.split(" to ");
+
+  var date_from = dates[0];
+  var date_to = dates[1];
+  let data = {'date_start' : date_from,'date_end' : date_to}
+  console.log(data);
+  get_van_talbe(data)
+}
+async function get_van_talbe(data={}) {
+  let res = await ajax_get_van_table(data);
   html_admin_main_van(res);
 }
 function ajax_get_van_table(data = {}) {
@@ -82,8 +125,9 @@ function ajax_get_van_order(data = {}) {
 }
 
 function modal_order_detail(data = {}) {
-  console.log(data);
   html_price = "";
+  let date_flatpicker_sel = $('.date_flatpicker_sel').val();
+
   $.each(data, function (i, v) {
     van_id = v["van_id"];
     brand = v["brand"];
@@ -167,7 +211,7 @@ function modal_order_detail(data = {}) {
 
                                     <label for="basic-url" class="form-label">วันที่เช่ารถ</label>
                                     <div class="form-group">
-                                        <input type="text" class="form-control date_flatpicker" placeholder="Date Picker">
+                                        <input type="text" class="form-control date_flatpicker" value="${date_flatpicker_sel}" placeholder="Date Picker" readonly>
                                     </div>
 
                                     <h3>ราคาวันละ : ${price}</h3>

@@ -1,9 +1,8 @@
 <?php
-session_start();
-if(!isset($_SESSION['ID'])){
-    // header( "location: sign-in.php" );
-
-}
+    session_start();
+    if(!isset($_SESSION['ID'])){
+        // header( "location: sign-in.php" );
+    }
 ?>
 <!doctype html>
 <html lang="en" dir="ltr">
@@ -82,8 +81,12 @@ if(!isset($_SESSION['ID'])){
         <div class="conatiner-fluid content-inner mt-n5 py-0">
             <!-- MAIN BODY START -->
             <div class="mt-5">
+                <div class="row check_car_st_date">
+                    
+                </div>
                 <div class="row  row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4 van-detail">
                     <!-- Van -->
+                    
                 </div>
             </div>    
             
@@ -146,4 +149,5 @@ if(!isset($_SESSION['ID'])){
 
 </html>
 <script>
+   
 </script>

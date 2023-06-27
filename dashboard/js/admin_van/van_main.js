@@ -153,6 +153,11 @@ async function modal_add_van() {
                                 ${html_selct_type_option}
                               </select>
                           </div>
+
+                          <label for="basic-url" class="form-label">คุณสมบัติพิเศษ</label>
+                          <div class="input-group mb-3">
+                            <textarea id="" name="" rows="4" cols="50" class="form-control inp_remark" aria-describedby="basic-addon3"></textarea>
+                          </div>
                         </div>
                         <div class="col">
                           <label for="basic-url" class="form-label">รูปหลัก</label>
@@ -252,6 +257,7 @@ async function save_van() {
   let picl = $("#blahl").attr('src');
   let picr = $("#blahr").attr('src');
   let picb = $("#blahb").attr('src');
+  let inp_remark = $(".inp_remark").val();
 
   let data = {
     plate: plate,
@@ -265,6 +271,7 @@ async function save_van() {
     picl : picl,
     picr : picr,
     picb : picb,
+    inp_remark:inp_remark,
   };
   let res = await ajax_save_van(data);
   if (res["st"] == "1") {
@@ -329,7 +336,7 @@ async function modal_edit_van(data = {}) {
   let picl = !!data["picl"] ? data["picl"] : "";
   let picr = !!data["picr"] ? data["picr"] : "";
   let picb = !!data["picb"] ? data["picb"] : "";
-
+  let remark = !!data["remark"] ? data["remark"] : "";
   let html = "";
   html = `
       <!-- Modal -->
@@ -387,6 +394,10 @@ async function modal_edit_van(data = {}) {
                             ${html_selct_type_option}
                           </select>                        
                         </div>
+                        <label for="basic-url" class="form-label">คุณสมบัติพิเศษ</label>
+                          <div class="input-group mb-3">
+                            <textarea id="" name="" rows="4" cols="50" class="form-control inp_remark"  aria-describedby="basic-addon3">${remark}</textarea>
+                          </div>
                       </div>
                       <div class="col">
                         <label for="basic-url" class="form-label">รูปหลัก</label>
@@ -478,7 +489,7 @@ async function save_edit_van(e = null) {
   let picl = $("#blahl").attr('src');
   let picr = $("#blahr").attr('src');
   let picb = $("#blahb").attr('src');
-
+  let inp_remark = $(".inp_remark").val();
   let data = {
     ID: ID,
     plate: plate,
@@ -492,6 +503,7 @@ async function save_edit_van(e = null) {
     picl : picl,
     picr : picr,
     picb : picb,
+    inp_remark:inp_remark,
 
   };
   let res = await ajax_save_edit_van(data);

@@ -12,6 +12,7 @@ $picf = $_POST['picf'];
 $picl = $_POST['picl'];
 $picr = $_POST['picr'];
 $picb = $_POST['picb'];
+$inp_remark = $_POST['inp_remark'];
 $sql = "
     INSERT INTO `van`(
         `brand`,
@@ -24,7 +25,8 @@ $sql = "
         `picf`,
         `picl`,
         `picr`,
-        `picb`
+        `picb`,
+        remark
     )
     VALUES(
         
@@ -38,7 +40,8 @@ $sql = "
         '$picf',
         '$picl',
         '$picr',
-        '$picb'
+        '$picb',
+        '$inp_remark'
     );
 ";
 if ($con->query($sql) === TRUE) {

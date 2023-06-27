@@ -13,7 +13,7 @@ $picf = $_POST['picf'];
 $picl = $_POST['picl'];
 $picr = $_POST['picr'];
 $picb = $_POST['picb'];
-
+$inp_remark = $_POST['inp_remark'];
 
 $sql = "
   UPDATE
@@ -29,7 +29,8 @@ $sql = "
     `picf` = '$picf',
     `picl` = '$picl',
     `picr` = '$picr',
-    `picb` = '$picb'
+    `picb` = '$picb',
+    remark = '$inp_remark' 
   WHERE
     `ID` = '$ID'
 
