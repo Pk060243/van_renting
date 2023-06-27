@@ -129,7 +129,7 @@ async function modal_approve_order(data = {}){
                     
                         <div>
                             <label for="basic-url" class="form-label">รายละเอียดการเช่า</label>
-                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขเช่าxxx : ${order_no}</label></div>
+                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขเช่า : ${order_no}</label></div>
                                 <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ทะเบียนรถ : ${van_plate}</label></div>
                                 <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เช่าวันที่ : ${date_start} ถึง ${date_end}</label></div>
                                 <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ชื่อลูกค้า : ${customer_full_name}</label></div>
@@ -305,6 +305,8 @@ async function html_table_approved_order(data = {}) {
         $.each(data, function (i, v) { 
             if(v['order_st'] == '1'){
                 order_status = 'สำเร็จ';
+            }else if(v['order_st'] == '0'){
+                order_status = 'ถูกปฏิเสธ / ยกเลิก';
             }
 
             html_approve_button = `<button class="btn btn-primary" data-id="${v['order_id']}" onclick="view_approved_order(this)">ตรวจสอบ</button>`;
@@ -334,10 +336,10 @@ async function view_approved_order(e = null) {
 
 }
 function modal_view_approve_order(data = {}){
-     
+
     let ID = data['order_id'];
     let pic = data['payment_pic'];
-    let order_no = data['order_nmber'];
+    let order_no = data['order_number'];
     let van_plate = data['van_plate'];
     let date_start = data['date_start'];
     let date_end = data['date_end'];

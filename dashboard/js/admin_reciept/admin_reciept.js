@@ -79,91 +79,7 @@ function ajax_get_approve_order_by_ID(data = {}){
         });
     });
 }
-async function modal_approve_order(data = {}){
-   
-    console.log(data);
-    let ID = data['order_id'];
-    let pic = data['payment_pic'];
-    let order_no = data['order_number'];
-    let van_plate = data['van_plate'];
-    let date_start = data['date_start'];
-    let date_end = data['date_end'];
-    let customer_full_name = data['customer_full_name'];
-    let phone = data['phone'];
-    let price = data['price'];
-    let payment_type = data['payment_type'];
-    if(payment_type == '1'){
-        text_payment = 'จ่ายเต็มจำนวน';
-    }else{
-        text_payment = 'จ่ายมัดจำ';
-    }
 
-    let date_order = {'start' : date_start, 'end' : date_end}
-    //ดึงข้อมูลคนขับ มาเป้น select
-    let driver_data = await ajax_get_driver(date_order);
-    console.log(driver_data);
-    let html_select_driver = '';
-    let html_select_driver_option = '';
-    if (driver_data['st'] != '0') {
-        $.each(driver_data['data'], function (i, v) { 
-            html_select_driver_option += `<option value="${v['driver_id']}">${v['fname'] +" "+ v['lname']}</option>`;
-        });
-    }
-    html_select_driver += '<select class="form-select sel_driver ">';
-    html_select_driver += html_select_driver_option;
-    html_select_driver += '</select>';
-
-    let html = '';
-    $('#modal_approve_order').remove();
-    html = `
-        <!-- Modal -->
-        <div class="modal fade " id="modal_approve_order" data-id="${ID}" tabindex="-1" aria-labelledby="modal_approve_orderLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modal_approve_orderLabel">ยืนยันการเช่า</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="container">
-                    
-                        <div>
-                            <label for="basic-url" class="form-label">รายละเอียดการเช่า</label>
-                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขเช่าxxx : ${order_no}</label></div>
-                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ทะเบียนรถ : ${van_plate}</label></div>
-                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เช่าวันที่ : ${date_start} ถึง ${date_end}</label></div>
-                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ชื่อลูกค้า : ${customer_full_name}</label></div>
-                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เบอร์โทร : ${phone}</label></div>
-                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ราคา : ${price}</label></div>
-                                <div style="margin-left:10px;"><label for="basic-url" class="form-label" >การจ่ายเงิน : ${text_payment}</label></div>
-
-                        </div>
-                        
-                        <div class="col-md-6">
-                            <label for="basic-url" class="form-label">เลือกคนขับ</label>
-                            <div>${html_select_driver}</div>
-                                
-                        </div>
-                        <label for="basic-url" class="form-label">หลักฐานการชำระเงิน</label>
-                        <div style="width:100%">
-                            <img id="blah" src="${pic}" style="width: 100%;" />
-                        </div>
-                        
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-id="${data['order_id']}" onclick="confirm_order(this);">ยืนยัน</button>
-                    <button type="button" class="btn btn-danger" data-id="${data['order_id']}" onclick="denied_order(this);">ปฎิเสธ</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">ปิด</button>
-
-                </div>
-                </div>
-            </div>
-        </div>
-    `;
-    $('body').append(html);
-    $('#modal_approve_order').modal('show');
-}
 function ajax_get_driver(date_order){
     return new Promise(function (resolve, reject) {
         $.ajax({
@@ -340,7 +256,7 @@ function modal_view_approve_order(data = {}){
      
     let ID = data['order_id'];
     let pic = data['payment_pic'];
-    let order_no = data['order_nmber'];
+    let order_no = data['order_number'];
     let van_plate = data['van_plate'];
     let date_start = data['date_start'];
     let date_end = data['date_end'];

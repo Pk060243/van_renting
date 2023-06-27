@@ -40,7 +40,6 @@ async function modal_upload_pic(e = null) {
     let start = new Date(date_start);
     let end = new Date(date_end);
     var diff = end - start;
-
     var diffInDays = diff / (1000 * 60 * 60 * 24);
     
     let html_deposit
@@ -172,7 +171,7 @@ function card_order_list(data = {}) {
             text_status_order ='รอการยืนยัน';
             button_html = `<button data-id="${v['order_id']}" class="btn btn-info float-end" onclick="modal_view_order(this);">ตรวจสอบ</button>`;
         }else if(order_st == '0'){
-            text_status_order ='ถูกปฎิเสธ ';
+            text_status_order ='ถูกปฎิเสธ / ยกเลิก';
             button_html = `<button data-id="${v['order_id']}" class="btn btn-info float-end" onclick="modal_view_order(this);">ตรวจสอบ</button>`;
 
         }
@@ -210,12 +209,18 @@ function card_order_list(data = {}) {
 
 async function cancel_order(e = null) {
     let ID = $(e).closest("#modal_upload_payment").attr("data-id");
+    if (!!ID) {
+        
+    }else{
+        ID = $(e).closest("#modal_view_success_order").attr("data-id");
+    }
+    console.log(ID);
     data = {
         ID : ID,
     }
     Swal.fire({
         title: 'ยกเลิกการเช่า',
-        text: "คุณต้องการยกเลิกการเช่านี้หรือไม่",
+        text: "หากคุณยกเลิก ทางบริษัทขอสงวนสิทธิ์ในการคืนเงิน",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -277,6 +282,7 @@ function ajax_get_view_order(data) {
 function modal_view_success_order(data = {}) {
     console.log(data);
     $('#modal_view_success_order').remove();
+    let ID = data['order_id'];
     let pic = data['payment_pic'];
     let order_no = data['order_number'];
     let date_start = data['date_start'];
@@ -287,10 +293,17 @@ function modal_view_success_order(data = {}) {
     let price = data['price'];
     let order_st = data['order_st'];
 
+    
     let d_name = data['driver_name'];
     let d_lname = data['driver_lname'];
     let d_phone = data['driver_phone'];
     let d_pic = data['driver_pic'];
+
+
+    let start = new Date(date_start);
+    let end = new Date(date_end);
+    var diff = end - start;
+    var diffInDays = diff / (1000 * 60 * 60 * 24);
 
     $html_button = '';
     if(order_st == '0'){
@@ -317,7 +330,7 @@ function modal_view_success_order(data = {}) {
     }
     html = `
     <!-- Modal -->
-    <div class="modal fade " id="modal_view_success_order" tabindex="-1" aria-labelledby="modal_view_success_orderLabel" aria-hidden="true">
+    <div class="modal fade " id="modal_view_success_order" data-id="${ID}" tabindex="-1" aria-labelledby="modal_view_success_orderLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
             <div class="modal-header">
@@ -330,7 +343,7 @@ function modal_view_success_order(data = {}) {
                     <div class="col-md-6">
                         <label for="basic-url" class="form-label">รายละเอียดการเช่า</label>
                             <div style="margin-left:10px;"><label for="basic-url" class="form-label" >หมายเลขเช่า : ${order_no}</label></div>
-                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เช่าวันที่  : ${date_start} ถึง ${date_end}</label></div>
+                            <div style="margin-left:10px;"><label for="basic-url" class="form-label" >เช่าวันที่  : ${date_start} ถึง ${date_end} (${diffInDays+1} วัน)</label></div>
                             <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ยี่ห้อ : ${brand}</label></div>
                             <div style="margin-left:10px;"><label for="basic-url" class="form-label" >รุ่น : ${model}</label></div>
                             <div style="margin-left:10px;"><label for="basic-url" class="form-label" >ราคา : ${price}</label></div>

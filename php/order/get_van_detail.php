@@ -6,7 +6,6 @@ $sql = "
     SELECT
         van.`ID` as 'van_id',
         price.`ID` as 'price_id',
-
         `brand`,
         `model`,
         `color`,
@@ -21,7 +20,8 @@ $sql = "
         `st`,
         price.price_name,
         price.price,
-        van_type.type_name
+        van_type.type_name,
+        van.remark
 
     FROM
         `van`

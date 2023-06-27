@@ -111,7 +111,7 @@
                                                       <h3 class="mb-4">ข้อมูลบัญชีผู้ใช้</h3>
                                                    </div>
                                                    <div class="col-5">
-                                                      <h2 class="steps">ขั้นที่ 1 - 4</h2>
+                                                      <h2 class="steps">ขั้นที่ 1 - 3</h2>
                                                    </div>
                                                 </div>
                                                 <div class="row">
@@ -139,7 +139,7 @@
                                                       <h3 class="mb-4">ข้อมูลของท่าน:</h3>
                                                    </div>
                                                    <div class="col-5">
-                                                      <h2 class="steps">ขั้นที่ 2 - 4</h2>
+                                                      <h2 class="steps">ขั้นที่ 2 - 3</h2>
                                                    </div>
                                                 </div>
                                                 <div class="row">
@@ -170,7 +170,7 @@
 
                                                 </div>
                                              </div>
-                                             <button type="button" name="next" class="btn btn-primary next action-button float-end" value="Next">Next</button>
+                                             <button type="button" name="next" class="btn btn-primary next action-button float-end" onclick="signup.save_signup();" value="Next">Next</button>
                                              <button type="button" name="previous" class="btn btn-dark previous action-button-previous float-end me-1" value="Previous">Previous</button>
                                           </fieldset>
 
@@ -182,7 +182,7 @@
                                                       <h3 class="mb-4 text-left">Finish:</h3>
                                                    </div>
                                                    <div class="col-5">
-                                                      <h2 class="steps">ขั้นที่ 4 - 4</h2>
+                                                      <h2 class="steps">ขั้นที่ 3 - 3</h2>
                                                    </div>
                                                 </div>
                                                 <br><br>

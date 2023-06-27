@@ -34,14 +34,14 @@
         $arr_res = array('st' => '0');
     }
 
-    $sql_customer_detail = "
+    echo $sql_customer_detail = "
     INSERT INTO `customer_detail`(
         
         `user_id`,
         `Fname`,
         `Lname`,
         `phone`,
-        `email`,
+        `email`
        
     )
     VALUES(
@@ -49,7 +49,7 @@
         '$name',
         '$lname',
         '$phone',
-        '$email',
+        '$email'
         
     )
     ";

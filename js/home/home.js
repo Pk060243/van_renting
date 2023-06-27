@@ -17,7 +17,7 @@ async function sel_van_date() {
               เลือกวันที่ต้องการเช่า
               <div class="row">
                   <div class="form-group col-md-8"style=" display: inline-flex;">
-                    <input type="text" class="form-control date_flatpicker_sel " placeholder="Date Picker" style="width: 50%;">
+                    <input type="text" class="form-control date_flatpicker_sel " placeholder="เลือกวันที่ไป-กลับ" style="width: 50%;">
                     <button class="btn btn-success search_van_date" onclick="search_van();">ค้นหา</button>
                   </div>
               </div>
@@ -145,6 +145,7 @@ function modal_order_detail(data = {}) {
     price_name = v["price_name"];
     price = v["price"];
     type_name = v["type_name"];
+    remark = v["remark"];
 });
   $("#modal_order_detail").remove();
   html = "";
@@ -189,6 +190,10 @@ function modal_order_detail(data = {}) {
                                     <label for="basic-url" class="form-label">ประเภท</label>
                                     <div class="input-group mb-3">
                                         <input type="text" class="form-control inp_type" id="" aria-describedby="basic-addon3" value="${type_name}">
+                                    </div>
+                                    <label for="basic-url" class="form-label">คุณสมบัติพิเศษ</label>
+                                    <div class="input-group mb-3">
+                                      <textarea id="" name="" rows="4" cols="50" class="form-control inp_remark"  aria-describedby="basic-addon3">${remark}</textarea>
                                     </div>
                                 </div>
                                 <div class="col">

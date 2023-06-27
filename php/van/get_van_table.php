@@ -17,7 +17,7 @@ if ($date_to != '') {
 }
 if ($date_to != '') {
         
-    $sql = "
+     $sql = "
     SELECT
         `van`.`ID`,
         `brand`,
@@ -30,11 +30,13 @@ if ($date_to != '') {
     FROM
         `van`
         LEFT JOIN
-        order_header oh ON oh.van_id = van.ID  
+        order_header oh ON oh.van_id = van.ID AND oh.st != '0'
     WHERE
     `van`.`st` != 0
     AND (oh.date_start NOT BETWEEN '$date_from' AND '$date_to' OR oh.date_start IS NULL)
-    AND (oh.date_end NOT BETWEEN '$date_from' AND '$date_to' OR oh.date_end IS NULL);
+    AND (oh.date_end NOT BETWEEN '$date_from' AND '$date_to' OR oh.date_end IS NULL)
+    
+    ;
     ";
 }else{
     

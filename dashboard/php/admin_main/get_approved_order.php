@@ -23,7 +23,7 @@ $sql = "
         `order_header`
     JOIN customer_detail cd on cd.user_id = order_header.customer_id
     WHERE
-        `st` in ('1')
+        `st` in ('1','0')
     ORDER BY order_header.st DESC
     ";
 $result = mysqli_query($con, $sql) or die(mysqli_error($con));

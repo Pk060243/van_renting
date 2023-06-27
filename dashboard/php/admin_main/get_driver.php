@@ -9,7 +9,7 @@ SELECT
         driver.ID as 'driver_id'
     FROM
         `driver`
-    LEFT JOIN order_header oh on oh.driver_id = driver.ID
+    LEFT JOIN order_header oh on oh.driver_id = driver.ID AND oh.st != '0'
     WHERE
         driver.`st` in ('1')
         AND oh.date_start NOT BETWEEN '$start' AND '$end'
